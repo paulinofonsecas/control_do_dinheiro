@@ -6,15 +6,21 @@ import 'package:dartz/dartz.dart';
 import 'package:sqflite/sqflite.dart';
 
 abstract class IDataSourceTrabalhador {
-  Future<Either<Exception, bool>> cadastrar(TrabalhadorModel trabalhadorModel);
+  Future<Either<Exception, bool>> cadastrar(
+    TrabalhadorModel trabalhadorModel,
+  );
   Future<Either<Exception, TrabalhadorModel>> buscarTrabalhadorPorId(
-      int id);
+    int id,
+  );
   Future<Either<Exception, TrabalhadorModel>> buscarTrabalhadorPorBi(
-      String bi);
+    String bi,
+  );
   Future<Either<Exception, TrabalhadorModel>> buscarTrabalhadorPorNome(
-      String nome);
+    String nome,
+  );
   Future<Either<Exception, TrabalhadorModel>> eliminarUmTrabalhador(
-      int id);
+    int id,
+  );
   Future<Either<Exception, List<TrabalhadorModel>>>
       buscarTodosOsTrabalhadores();
 }
@@ -53,8 +59,7 @@ class DataSourceTrabalhador implements IDataSourceTrabalhador {
   }
 
   @override
-  Future<Either<Exception, TrabalhadorModel>> eliminarUmTrabalhador(
-      int id) {
+  Future<Either<Exception, TrabalhadorModel>> eliminarUmTrabalhador(int id) {
     return _dataBase.eliminarUmTrabalhador(id);
   }
 }
@@ -85,11 +90,8 @@ class DataBaseImpl {
       TrabalhadorModel trabalhadorModel) async {
     var db = await open();
     try {
-      await db.insert(
-        table,
-        trabalhadorModel.toMap(),
-        conflictAlgorithm: ConflictAlgorithm.abort
-      );
+      await db.insert(table, trabalhadorModel.toMap(),
+          conflictAlgorithm: ConflictAlgorithm.abort);
       return Right(true);
     } catch (e) {
       return Left(FalhaAoInserirNoBD());
