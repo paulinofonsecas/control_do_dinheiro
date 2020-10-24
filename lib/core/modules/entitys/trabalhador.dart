@@ -1,6 +1,7 @@
 import 'package:control_do_dinheiro/core/modules/entitys/pessoa.dart';
 
 class Trabalhador extends Pessoa {
+  final int idTrabalhador;
   final String bi;
   final String nome;
   final DateTime dataDeAniversario;
@@ -9,6 +10,7 @@ class Trabalhador extends Pessoa {
   final double salario;
 
   Trabalhador({
+    this.idTrabalhador,
     this.bi,
     this.nome,
     this.dataDeAniversario,

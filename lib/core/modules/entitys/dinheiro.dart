@@ -1,15 +1,15 @@
 abstract class Dinheiro {
   final int idDinheiro;
+  final int idTrabalhador;
   final double valorPresente;
   final double valorTotal;
   final DateTime data;
-  final List<int> idDosTrabalhadores;
 
   Dinheiro(
     this.idDinheiro,
     this.valorPresente,
     this.valorTotal,
     this.data,
-    this.idDosTrabalhadores,
+    this.idTrabalhador,
   );
 }

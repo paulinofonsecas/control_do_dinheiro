@@ -5,18 +5,24 @@ import 'package:dartz/dartz.dart';
 import 'package:control_do_dinheiro/core/modules/utils/forma_de_busca.dart';
 
 class RepositorioDeTrabalhadores implements IRepositorioDeTrabalhadores {
-  IDataSourceTrabalhadores _dataSource;
+  IDataSourceTrabalhador _dataSource;
+
+  RepositorioDeTrabalhadores(this._dataSource);
 
   @override
   Future<Either<Exception, List<Trabalhador>>>
       buscarTodosOsTrabalhadores() async {
-    return _dataSource.buscarTodosOsTrabalhadores();
+    Either<Exception, List<Trabalhador>> result =
+        await _dataSource.buscarTodosOsTrabalhadores();
+    return result;
   }
 
   @override
   Future<Either<Exception, Trabalhador>> buscarTrabalhadorPor(
       Trabalhador trabalhador, FormaDeBusca formaDeBusca) async {
     switch (formaDeBusca) {
+      case FormaDeBusca.id:
+        return _dataSource.buscarTrabalhadorPorId(trabalhador.idTrabalhador);
       case FormaDeBusca.bi:
         return _dataSource.buscarTrabalhadorPorBi(trabalhador.bi);
         break;
@@ -34,7 +40,7 @@ class RepositorioDeTrabalhadores implements IRepositorioDeTrabalhadores {
   }
 
   @override
-  Future<Either<Exception, Trabalhador>> eliminarUmTrabalhador(String bi) {
-    return _dataSource.eliminarUmTrabalhador(bi);
+  Future<Either<Exception, Trabalhador>> eliminarUmTrabalhador(int id) {
+    return _dataSource.eliminarUmTrabalhador(id);
   }
 }
