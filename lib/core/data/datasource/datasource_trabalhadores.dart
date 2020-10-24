@@ -88,6 +88,7 @@ class DataBaseImpl {
       await db.insert(
         table,
         trabalhadorModel.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.abort
       );
       return Right(true);
     } catch (e) {
