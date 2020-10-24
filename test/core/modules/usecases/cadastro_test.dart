@@ -1,8 +1,8 @@
 import 'package:control_do_dinheiro/core/modules/entitys/trabalhador.dart';
 import 'package:control_do_dinheiro/core/modules/entitys/usuario.dart';
 import 'package:control_do_dinheiro/core/modules/erros/entidades.dart';
-import 'package:control_do_dinheiro/core/modules/repositorios/repositorio_de_trabalhadores.dart';
-import 'package:control_do_dinheiro/core/modules/repositorios/repositorio_de_usuarios.dart';
+import 'package:control_do_dinheiro/core/modules/repositorios/i_repositorio_de_trabalhadores.dart';
+import 'package:control_do_dinheiro/core/modules/repositorios/i_repositorio_de_usuarios.dart';
 import 'package:control_do_dinheiro/core/modules/usecases/cadastro.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';

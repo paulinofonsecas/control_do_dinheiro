@@ -4,7 +4,7 @@ import 'package:dartz/dartz.dart';
 
 abstract class IRepositorioDeTrabalhadores {
   Future<Either<Exception, bool>> cadastrar(Trabalhador trabalhador);
-  Future<Either<Exception, Trabalhador>> buscarTrabalhadorPor(
+  Future<Either<Exception, Trabalhador>> buscarTrabalhadorPor(Trabalhador trabalhador, 
       FormaDeBusca formaDeBusca);
   Future<Either<Exception, Trabalhador>> eliminarUmTrabalhador(String bi);
   Future<Either<Exception, List<Trabalhador>>> buscarTodosOsTrabalhadores();

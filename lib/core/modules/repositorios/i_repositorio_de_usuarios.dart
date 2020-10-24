@@ -4,7 +4,7 @@ import 'package:dartz/dartz.dart';
 
 abstract class IRepositorioDeUsuarios {
   Future<Either<Exception, bool>> cadastrar(Usuario usuario);
-  Future<Either<Exception, Usuario>> buscarUsuarioPor(
+  Future<Either<Exception, Usuario>> buscarUsuarioPor(Usuario usuario,
       FormaDeBusca formaDeBusca);
   Future<Either<Exception, Usuario>> eliminarUmUsuario(String bi);
   Future<Either<Exception, List<Usuario>>> buscarTodosOsUsuarios();
