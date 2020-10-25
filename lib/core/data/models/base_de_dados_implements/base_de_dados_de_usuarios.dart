@@ -1,12 +1,12 @@
 import 'dart:io';
 
+import 'package:control_do_dinheiro/core/data/erros/erros.dart';
 import 'package:control_do_dinheiro/core/data/models/data_base.dart';
 import 'package:control_do_dinheiro/core/data/models/usuario_model.dart';
-import 'package:control_do_dinheiro/core/modules/entitys/usuario.dart';
 import 'package:dartz/dartz.dart';
 import 'package:sqflite/sqflite.dart';
 
-class BaseDeDadosDeUsuariosImpl implements BaseDeDados<UsuarioModel>{
+class BaseDeDadosDeUsuariosImpl implements BaseDeDados<UsuarioModel> {
   var table = 'usuario';
   var idUsuarioColumn = 'idUsuario';
   var biColumn = 'bi';
@@ -26,39 +26,114 @@ class BaseDeDadosDeUsuariosImpl implements BaseDeDados<UsuarioModel>{
   }
 
   @override
-  Future<Either<Exception, UsuarioModel>> buscarPorBi(String bi) {
-    // TODO: implement buscarPorBi
-    throw UnimplementedError();
+  Future<Either<Exception, UsuarioModel>> buscarPorBi(String bi) async {
+    var db = await open();
+    try {
+      var result = await db.query(table, where: 'bi=?', whereArgs: [bi]);
+      if (result != null && result.isNotEmpty) {
+        var usuario = UsuarioModel.fromMap(result.first);
+        return Right(usuario);
+      } else {
+        return Left(ElementoNaoExistenteNaBD());
+      }
+    } catch (e) {
+      return Left(e);
+    } finally {
+      await db.close();
+    }
   }
 
   @override
-  Future<Either<Exception, UsuarioModel>> buscarPorId(int id) {
-    // TODO: implement buscarPorId
-    throw UnimplementedError();
+  Future<Either<Exception, UsuarioModel>> buscarPorId(int id) async {
+    var db = await open();
+    try {
+      var result = await db.query(table, where: 'id=?', whereArgs: [id]);
+      if (result != null && result.isNotEmpty) {
+        var usuario = UsuarioModel.fromMap(result.first);
+        return Right(usuario);
+      } else {
+        return Left(ElementoNaoExistenteNaBD());
+      }
+    } catch (e) {
+      return Left(e);
+    } finally {
+      await db.close();
+    }
   }
 
   @override
-  Future<Either<Exception, UsuarioModel>> buscarPorNome(String nome) {
-    // TODO: implement buscarPorNome
-    throw UnimplementedError();
+  Future<Either<Exception, UsuarioModel>> buscarPorNome(String nome) async {
+    var db = await open();
+    try {
+      var result = await db.query(table, where: 'nome=?', whereArgs: [nome]);
+      if (result != null && result.isNotEmpty) {
+        var usuario = UsuarioModel.fromMap(result.first);
+        return Right(usuario);
+      } else {
+        return Left(ElementoNaoExistenteNaBD());
+      }
+    } catch (e) {
+      return Left(e);
+    } finally {
+      await db.close();
+    }
   }
 
   @override
-  Future<Either<Exception, UsuarioModel>> eliminar(int id) {
-    // TODO: implement eliminar
-    throw UnimplementedError();
+  Future<Either<Exception, UsuarioModel>> eliminar(int id) async {
+    var db = await open();
+    var usuarioARemover = await buscarPorId(id);
+    if (usuarioARemover != null && usuarioARemover is Right) {
+      try {
+        var result = await db.delete(table);
+        if (result == 1) {
+          return usuarioARemover;
+        } else {
+          return Left(ErroInterno());
+        }
+      } catch (e) {
+        return Left(ElementoNaoExistenteNaBD());
+      } finally {
+        await db.close();
+      }
+    } else {
+      return Left(ElementoNaoExistenteNaBD());
+    }
   }
 
   @override
-  Future<Either<Exception, List<UsuarioModel>>> getAll() {
-    // TODO: implement getAll
-    throw UnimplementedError();
+  Future<Either<Exception, List<UsuarioModel>>> getAll() async {
+    var db = await open();
+    try {
+      var listOnMap = await db.query(table);
+      if (listOnMap != null && listOnMap.isNotEmpty) {
+        var usuarioModelList =
+            listOnMap.map((map) => UsuarioModel.fromMap(map));
+        return Right(usuarioModelList);
+      } else {
+        return Left(BDVazia());
+      }
+    } catch (e) {
+      return Left(ErroInterno());
+    } finally {
+      await db.close();
+    }
   }
 
   @override
-  Future<Either<Exception, bool>> inserir(UsuarioModel t) {
-    // TODO: implement inserir
-    throw UnimplementedError();
+  Future<Either<Exception, bool>> inserir(UsuarioModel t) async {
+    var db = await open();
+    try {
+      var result = await db.insert(table, t.toMap());
+      if (result >= 0) {
+        return Right(true);
+      } else {
+        return Right(false);
+      }
+    } catch (e) {
+      return Left(FalhaAoInserirNoBD());
+    } finally {
+      await db.close();
+    }
   }
-
 }

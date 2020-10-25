@@ -49,7 +49,7 @@ class BaseDeDadosDeTrabalhadoresImpl implements BaseDeDados<TrabalhadorModel> {
         var trabalhadorModel = TrabalhadorModel.fromMap(listMap.first);
         return Right(trabalhadorModel);
       } else {
-        return Left(ElementoExistenteNaBD());
+        return Left(ElementoNaoExistenteNaBD());
       }
     } catch (e) {
       return Left(e);
@@ -64,7 +64,7 @@ class BaseDeDadosDeTrabalhadoresImpl implements BaseDeDados<TrabalhadorModel> {
         var trabalhadorModel = TrabalhadorModel.fromMap(listMap.first);
         return Right(trabalhadorModel);
       } else {
-        return Left(ElementoExistenteNaBD());
+        return Left(ElementoNaoExistenteNaBD());
       }
     } catch (e) {
       return Left(e);
@@ -79,7 +79,7 @@ class BaseDeDadosDeTrabalhadoresImpl implements BaseDeDados<TrabalhadorModel> {
         var trabalhadorModel = TrabalhadorModel.fromMap(listMap.first);
         return Right(trabalhadorModel);
       } else {
-        return Left(ElementoExistenteNaBD());
+        return Left(ElementoNaoExistenteNaBD());
       }
     } catch (e) {
       return Left(e);

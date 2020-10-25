@@ -21,38 +21,31 @@ class DataSourceUsuarios implements IDataSourceUsuarios {
 
   @override
   Future<Either<Exception, List<Usuario>>> buscarTodosOsUsuarios() {
-    // TODO: implement buscarTodosOsUsuarios
-    throw UnimplementedError();
+    return _baseDeDados.getAll();
   }
 
   @override
   Future<Either<Exception, Usuario>> buscarUsuarioPorBi(String bi) {
-    // TODO: implement buscarUsuarioPorBi
-    throw UnimplementedError();
+    return _baseDeDados.buscarPorBi(bi);
   }
 
   @override
   Future<Either<Exception, Usuario>> buscarUsuarioPorId(int id) {
-    // TODO: implement buscarUsuarioPorId
-    throw UnimplementedError();
+    return _baseDeDados.buscarPorId(id);
   }
 
   @override
   Future<Either<Exception, Usuario>> buscarUsuarioPorNome(String nome) {
-    // TODO: implement buscarUsuarioPorNome
-    throw UnimplementedError();
+    return _baseDeDados.buscarPorNome(nome);
   }
 
   @override
   Future<Either<Exception, bool>> cadastrar(Usuario usuario) {
-    // TODO: implement cadastrar
-    throw UnimplementedError();
+    return _baseDeDados.inserir(usuario);
   }
 
   @override
   Future<Either<Exception, Usuario>> eliminarUmUsuario(int id) {
-    // TODO: implement eliminarUmUsuario
-    throw UnimplementedError();
+    return _baseDeDados.eliminar(id);
   }
-
 }
