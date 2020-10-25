@@ -1,5 +1,5 @@
 import 'package:control_do_dinheiro/core/modules/entitys/trabalhador.dart';
-import 'package:control_do_dinheiro/core/modules/utils/forma_de_busca.dart';
+import 'package:control_do_dinheiro/core/utils/forma_de_busca.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class IRepositorioDeTrabalhadores {

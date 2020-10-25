@@ -1,6 +1,7 @@
 import 'package:control_do_dinheiro/core/modules/entitys/pessoa.dart';
 
 class Usuario extends Pessoa {
+  final int idUsuario;
   final String bi;
   final String nome;
   final DateTime dataDeAniversario;
@@ -8,6 +9,7 @@ class Usuario extends Pessoa {
   final String urlDaFoto;
 
   Usuario({
+    this.idUsuario,
     this.bi,
     this.nome,
     this.dataDeAniversario,
