@@ -1,7 +1,4 @@
-import 'package:control_do_dinheiro/core/data/datasource/datasource_trabalhadores.dart';
 import 'package:control_do_dinheiro/core/data/models/base_de_dados_implements/base_de_dados_de_usuarios.dart';
-import 'package:control_do_dinheiro/core/data/models/data_base.dart';
-import 'package:control_do_dinheiro/core/data/models/trabalhador_model.dart';
 import 'package:control_do_dinheiro/core/modules/entitys/usuario.dart';
 import 'package:dartz/dartz.dart';
 

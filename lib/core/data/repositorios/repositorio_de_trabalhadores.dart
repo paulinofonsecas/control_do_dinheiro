@@ -18,20 +18,18 @@ class RepositorioDeTrabalhadores implements IRepositorioDeTrabalhadores {
   }
 
   @override
-  Future<Either<Exception, Trabalhador>> buscarTrabalhadorPor(
-      Trabalhador trabalhador, FormaDeBusca formaDeBusca) async {
-    switch (formaDeBusca) {
-      case FormaDeBusca.id:
-        return _dataSource.buscarTrabalhadorPorId(trabalhador.idTrabalhador);
-      case FormaDeBusca.bi:
-        return _dataSource.buscarTrabalhadorPorBi(trabalhador.bi);
-        break;
-      case FormaDeBusca.nome:
-        return _dataSource.buscarTrabalhadorPorNome(trabalhador.nome);
-        break;
-      default:
-        return null;
-    }
+  Future<Either<Exception, Trabalhador>> buscarTrabalhadorPorId(int id) {
+    return _dataSource.buscarTrabalhadorPorId(id);
+  }
+
+  @override
+  Future<Either<Exception, Trabalhador>> buscarTrabalhadorPorBi(String bi) {
+    return _dataSource.buscarTrabalhadorPorBi(bi);
+  }
+
+  @override
+  Future<Either<Exception, Trabalhador>> buscarTrabalhadorPorNome(String nome) {
+    return _dataSource.buscarTrabalhadorPorNome(nome);
   }
 
   @override

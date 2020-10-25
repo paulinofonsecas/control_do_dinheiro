@@ -1,15 +1,17 @@
 import 'package:control_do_dinheiro/core/data/datasource/datasource_trabalhadores.dart';
 import 'package:control_do_dinheiro/core/data/erros/erros.dart';
+import 'package:control_do_dinheiro/core/data/models/base_de_dados_implements/base_de_dados_de_trabalhadores.dart';
+import 'package:control_do_dinheiro/core/data/models/data_base.dart';
 import 'package:control_do_dinheiro/core/data/models/trabalhador_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-class DataBaseImplMock extends Mock implements DataBaseImpl {}
+class DataBaseImplMock extends Mock implements BaseDeDadosDeTrabalhadoresImpl {}
 
 void main() {
   IDataSourceTrabalhador _dataSource;
-  DataBaseImpl _dataBase;
+  BaseDeDados _dataBase;
 
   setUpAll(() {
     _dataBase = DataBaseImplMock();

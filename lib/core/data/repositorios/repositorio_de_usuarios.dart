@@ -2,7 +2,6 @@ import 'package:control_do_dinheiro/core/data/datasource/datasource_usuarios.dar
 import 'package:control_do_dinheiro/core/modules/entitys/usuario.dart';
 import 'package:control_do_dinheiro/core/modules/repositorios/i_repositorio_de_usuarios.dart';
 import 'package:dartz/dartz.dart';
-import 'package:control_do_dinheiro/core/utils/forma_de_busca.dart';
 
 class RepositorioDeUsuarios implements IRepositorioDeUsuarios {
   IDataSourceUsuarios _dataSource;
@@ -17,21 +16,16 @@ class RepositorioDeUsuarios implements IRepositorioDeUsuarios {
   }
 
   @override
-  Future<Either<Exception, Usuario>> buscarUsuarioPor(
-      Usuario usuario, FormaDeBusca formaDeBusca) async {
-    switch (formaDeBusca) {
-      case FormaDeBusca.id:
-        return _dataSource.buscarUsuarioPorId(usuario.idUsuario);
-        break;
-      case FormaDeBusca.bi:
-        return _dataSource.buscarUsuarioPorBi(usuario.bi);
-        break;
-      case FormaDeBusca.nome:
-        return _dataSource.buscarUsuarioPorNome(usuario.nome);
-        break;
-      default:
-        return null;
-    }
+  Future<Either<Exception, Usuario>> buscarUsuarioPorId(int id) async {
+    return _dataSource.buscarUsuarioPorId(id);
+  }
+
+  Future<Either<Exception, Usuario>> buscarUsuarioPorBi(String bi) {
+    return _dataSource.buscarUsuarioPorBi(bi);
+  }
+
+  Future<Either<Exception, Usuario>> buscarUsuarioPorNome(String nome) {
+    return _dataSource.buscarUsuarioPorNome(nome);
   }
 
   @override
