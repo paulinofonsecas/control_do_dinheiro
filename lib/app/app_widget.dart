@@ -1,28 +1,17 @@
 import 'package:flutter/material.dart';
 
+import 'pages/login_de_usuario/login_usuario_page.dart';
+
 class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Moagem Money',
       theme: ThemeData(
-        primarySwatch: Colors.amber,
+        primarySwatch: Colors.blue,
       ),
-      home: CadastrarUsuarioPage(),
-    );
-  }
-}
-
-class CadastrarUsuarioPage extends StatefulWidget {
-  @override
-  _CadastrarUsuarioPageState createState() => _CadastrarUsuarioPageState();
-}
-
-class _CadastrarUsuarioPageState extends State<CadastrarUsuarioPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      
+      home: LoginUsuarioPage(),
     );
   }
 }
