@@ -33,7 +33,7 @@ class DataSourceTrabalhador implements IDataSourceTrabalhador {
   @override
   Future<Either<Exception, List<TrabalhadorModel>>>
       buscarTodosOsTrabalhadores() async {
-    return _dataBase.buscarTodosOsTrabalhadorModeles();
+    return _dataBase.buscarTodosOsTrabalhadores();
   }
 
   @override
@@ -156,7 +156,7 @@ class DataBaseImpl {
   }
 
   Future<Either<Exception, List<TrabalhadorModel>>>
-      buscarTodosOsTrabalhadorModeles() async {
+      buscarTodosOsTrabalhadores() async {
     var db = await open();
     try {
       var listInMap = await db.query(table);
