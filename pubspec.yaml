@@ -10,6 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  intl: any
   google_fonts: any
   mockito: any
   shared_preferences: any

@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 
-class UsuarioEnterText extends StatelessWidget {
-  const UsuarioEnterText({
+class PrimaryEnterText extends StatelessWidget {
+  const PrimaryEnterText({
     Key key,
-    @required this.usuarioTextController,
+    @required this.title,
+    @required this.controller,
   }) : super(key: key);
 
-  final TextEditingController usuarioTextController;
+  final TextEditingController controller;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: TextField(
-        controller: usuarioTextController,
+        controller: controller,
         style: TextStyle(color: Colors.white),
         decoration: InputDecoration(
-          labelText: 'Nome de Usuario',
+          labelText: title,
           labelStyle: TextStyle(
             color: Colors.white,
           ),

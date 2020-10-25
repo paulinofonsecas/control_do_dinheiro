@@ -1,3 +1,5 @@
+import 'package:control_do_dinheiro/app/pages/cadastro_de_usuario/cadastro_de_usuario_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'componenetes/primary_button.dart';
@@ -29,12 +31,30 @@ class _LoginUsuarioPageState extends State<LoginUsuarioPage> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           _buildLogo(size),
-          UsuarioEnterText(usuarioTextController: usuarioTextController),
-          SenhaEnterText(senhaTextController: senhaTextController),
+          PrimaryEnterText(
+            controller: usuarioTextController,
+            title: 'Nome do usuario',
+          ),
+          SizedBox(height: size.height * .02),
+          SenhaEnterText(
+            senhaTextController: senhaTextController,
+            title: 'Palavra-passe',
+          ),
           SizedBox(height: size.height * .08),
-          PrimaryButton(title: 'Entrar'),
+          PrimaryButton(title: 'Entrar', onPressed: () {}),
           SizedBox(height: size.height * .01),
-          PrimaryButton(title: 'Criar conta', color: Colors.green),
+          PrimaryButton(
+            title: 'Criar conta',
+            color: Colors.green,
+            onPressed: () {
+              Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (_) => CadastroDeUsuarioPage(),
+                ),
+              );
+            },
+          ),
         ],
       ),
     );
