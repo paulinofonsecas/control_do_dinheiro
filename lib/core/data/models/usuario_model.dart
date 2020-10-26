@@ -4,18 +4,18 @@ import 'package:control_do_dinheiro/core/modules/entitys/usuario.dart';
 
 class UsuarioModel extends Usuario {
   final int idUsuario;
-  final String bi;
+  final String userName;
   final String nome;
   final DateTime dataDeAniversario;
-  final String morada;
+  final String senha;
   final String urlDaFoto;
 
   UsuarioModel({
     this.idUsuario,
-    this.bi,
+    this.userName,
     this.nome,
     this.dataDeAniversario,
-    this.morada,
+    this.senha,
     this.urlDaFoto,
   });
 
@@ -29,10 +29,10 @@ class UsuarioModel extends Usuario {
   }) {
     return UsuarioModel(
       idUsuario: idUsuario ?? this.idUsuario,
-      bi: bi ?? this.bi,
+      userName: bi ?? this.userName,
       nome: nome ?? this.nome,
       dataDeAniversario: dataDeAniversario ?? this.dataDeAniversario,
-      morada: morada ?? this.morada,
+      senha: morada ?? this.senha,
       urlDaFoto: urlDaFoto ?? this.urlDaFoto,
     );
   }
@@ -40,10 +40,10 @@ class UsuarioModel extends Usuario {
   Map<String, dynamic> toMap() {
     return {
       'idUsuario': idUsuario,
-      'bi': bi,
+      'bi': userName,
       'nome': nome,
       'dataDeAniversario': dataDeAniversario?.millisecondsSinceEpoch,
-      'morada': morada,
+      'morada': senha,
       'urlDaFoto': urlDaFoto,
     };
   }
@@ -53,11 +53,11 @@ class UsuarioModel extends Usuario {
 
     return UsuarioModel(
       idUsuario: map['idUsuario'],
-      bi: map['bi'],
+      userName: map['bi'],
       nome: map['nome'],
       dataDeAniversario:
           DateTime.fromMillisecondsSinceEpoch(map['dataDeAniversario']),
-      morada: map['morada'],
+      senha: map['morada'],
       urlDaFoto: map['urlDaFoto'],
     );
   }
@@ -69,7 +69,7 @@ class UsuarioModel extends Usuario {
 
   @override
   String toString() {
-    return 'UsuarioModel(idUsuario: $idUsuario, bi: $bi, nome: $nome, dataDeAniversario: $dataDeAniversario, morada: $morada, urlDaFoto: $urlDaFoto)';
+    return 'UsuarioModel(idUsuario: $idUsuario, bi: $userName, nome: $nome, dataDeAniversario: $dataDeAniversario, morada: $senha, urlDaFoto: $urlDaFoto)';
   }
 
   @override
@@ -78,20 +78,20 @@ class UsuarioModel extends Usuario {
 
     return o is UsuarioModel &&
         o.idUsuario == idUsuario &&
-        o.bi == bi &&
+        o.userName == userName &&
         o.nome == nome &&
         o.dataDeAniversario == dataDeAniversario &&
-        o.morada == morada &&
+        o.senha == senha &&
         o.urlDaFoto == urlDaFoto;
   }
 
   @override
   int get hashCode {
     return idUsuario.hashCode ^
-        bi.hashCode ^
+        userName.hashCode ^
         nome.hashCode ^
         dataDeAniversario.hashCode ^
-        morada.hashCode ^
+        senha.hashCode ^
         urlDaFoto.hashCode;
   }
 }

@@ -1,6 +1,8 @@
+import 'package:control_do_dinheiro/app/cubits/cadastro_de_usuario/cadastro_de_usuario_cubit.dart';
 import 'package:control_do_dinheiro/app/pages/cadastro_de_usuario/cadastro_de_usuario_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'componenetes/primary_button.dart';
 import 'componenetes/senha_enter_text.dart';
@@ -50,7 +52,10 @@ class _LoginUsuarioPageState extends State<LoginUsuarioPage> {
               Navigator.push(
                 context,
                 CupertinoPageRoute(
-                  builder: (_) => CadastroDeUsuarioPage(),
+                  builder: (_) => BlocProvider(
+                    create: (_) => CadastroDeUsuarioCubit(context),
+                    child: CadastroDeUsuarioPage(),
+                  ),
                 ),
               );
             },

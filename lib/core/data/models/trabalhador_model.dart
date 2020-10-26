@@ -4,19 +4,19 @@ import 'package:control_do_dinheiro/core/modules/entitys/trabalhador.dart';
 
 class TrabalhadorModel extends Trabalhador {
   final int idTrabalhador;
-  final String bi;
+  final String userName;
   final String nome;
   final DateTime dataDeAniversario;
-  final String morada;
+  final String senha;
   final String urlDaFoto;
   final double salario;
   
   TrabalhadorModel({
     this.idTrabalhador,
-    this.bi,
+    this.userName,
     this.nome,
     this.dataDeAniversario,
-    this.morada,
+    this.senha,
     this.urlDaFoto,
     this.salario,
   });
@@ -32,10 +32,10 @@ class TrabalhadorModel extends Trabalhador {
   }) {
     return TrabalhadorModel(
       idTrabalhador: idTrabalhador ?? this.idTrabalhador,
-      bi: bi ?? this.bi,
+      userName: bi ?? this.userName,
       nome: nome ?? this.nome,
       dataDeAniversario: dataDeAniversario ?? this.dataDeAniversario,
-      morada: morada ?? this.morada,
+      senha: morada ?? this.senha,
       urlDaFoto: urlDaFoto ?? this.urlDaFoto,
       salario: salario ?? this.salario,
     );
@@ -44,10 +44,10 @@ class TrabalhadorModel extends Trabalhador {
   Map<String, dynamic> toMap() {
     return {
       'idTrabalhador': idTrabalhador,
-      'bi': bi,
+      'bi': userName,
       'nome': nome,
       'dataDeAniversario': dataDeAniversario?.millisecondsSinceEpoch,
-      'morada': morada,
+      'morada': senha,
       'urlDaFoto': urlDaFoto,
       'salario': salario,
     };
@@ -58,11 +58,11 @@ class TrabalhadorModel extends Trabalhador {
 
     return TrabalhadorModel(
       idTrabalhador: map['idTrabalhador'],
-      bi: map['bi'],
+      userName: map['bi'],
       nome: map['nome'],
       dataDeAniversario:
           DateTime.fromMillisecondsSinceEpoch(map['dataDeAniversario']),
-      morada: map['morada'],
+      senha: map['morada'],
       urlDaFoto: map['urlDaFoto'],
       salario: map['salario'],
     );
@@ -75,7 +75,7 @@ class TrabalhadorModel extends Trabalhador {
 
   @override
   String toString() {
-    return 'TrabalhadorModel(idTrabalhador: $idTrabalhador, bi: $bi, nome: $nome, dataDeAniversario: $dataDeAniversario, morada: $morada, urlDaFoto: $urlDaFoto, salario: $salario)';
+    return 'TrabalhadorModel(idTrabalhador: $idTrabalhador, bi: $userName, nome: $nome, dataDeAniversario: $dataDeAniversario, morada: $senha, urlDaFoto: $urlDaFoto, salario: $salario)';
   }
 
   @override
@@ -84,10 +84,10 @@ class TrabalhadorModel extends Trabalhador {
 
     return o is TrabalhadorModel &&
         o.idTrabalhador == idTrabalhador &&
-        o.bi == bi &&
+        o.userName == userName &&
         o.nome == nome &&
         o.dataDeAniversario == dataDeAniversario &&
-        o.morada == morada &&
+        o.senha == senha &&
         o.urlDaFoto == urlDaFoto &&
         o.salario == salario;
   }
@@ -95,10 +95,10 @@ class TrabalhadorModel extends Trabalhador {
   @override
   int get hashCode {
     return idTrabalhador.hashCode ^
-        bi.hashCode ^
+        userName.hashCode ^
         nome.hashCode ^
         dataDeAniversario.hashCode ^
-        morada.hashCode ^
+        senha.hashCode ^
         urlDaFoto.hashCode ^
         salario.hashCode;
   }

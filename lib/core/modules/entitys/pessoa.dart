@@ -1,10 +1,10 @@
 abstract class Pessoa {
-  final String bi;
+  final String userName;
   final String nome;
   final DateTime dataDeAniversario;
-  final String morada;
+  final String senha;
   final String urlDaFoto;
 
   Pessoa(
-      this.bi, this.nome, this.dataDeAniversario, this.morada, this.urlDaFoto);
+      this.userName, this.nome, this.dataDeAniversario, this.senha, this.urlDaFoto);
 }
