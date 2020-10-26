@@ -23,11 +23,17 @@ class _CadastroDeUsuarioPageState extends State<CadastroDeUsuarioPage> {
     var size = MediaQuery.of(context).size;
     return BlocBuilder<CadastroDeUsuarioCubit, EstadoDoCadastro>(
       builder: (context, state) {
-        return body(
-          size,
-          context,
-          state,
-        );
+        if (state == EstadoDoCadastro.inicial) {
+          return body(
+            size,
+            context,
+            state,
+          );
+        } else {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
       },
     );
   }

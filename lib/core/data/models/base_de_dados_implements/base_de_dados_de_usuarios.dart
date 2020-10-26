@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:control_do_dinheiro/core/data/erros/erros.dart';
 import 'package:control_do_dinheiro/core/data/models/data_base.dart';
 import 'package:control_do_dinheiro/core/data/models/usuario_model.dart';
+import 'package:control_do_dinheiro/core/utils/open_database.dart';
 import 'package:dartz/dartz.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -16,6 +17,7 @@ class BaseDeDadosDeUsuariosImpl implements BaseDeDados<UsuarioModel> {
   var urlDaFotoColumn = 'urlDaFoto';
 
   Future<Database> open() async {
+    await prepareDatabase();
     var path = '${getDatabasesPath()}${Platform.pathSeparator}dados.db';
     return openDatabase(
       path,

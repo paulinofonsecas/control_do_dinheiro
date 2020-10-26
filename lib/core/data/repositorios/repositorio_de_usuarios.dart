@@ -1,4 +1,5 @@
 import 'package:control_do_dinheiro/core/data/datasource/datasource_usuarios.dart';
+import 'package:control_do_dinheiro/core/data/models/usuario_model.dart';
 import 'package:control_do_dinheiro/core/modules/entitys/usuario.dart';
 import 'package:control_do_dinheiro/core/modules/repositorios/i_repositorio_de_usuarios.dart';
 import 'package:dartz/dartz.dart';
@@ -30,7 +31,7 @@ class RepositorioDeUsuarios implements IRepositorioDeUsuarios {
 
   @override
   Future<Either<Exception, bool>> cadastrar(Usuario usuario) {
-    return _dataSource.cadastrar(usuario);
+    return _dataSource.cadastrar(UsuarioModel.fromUsuario(usuario));
   }
 
   @override
