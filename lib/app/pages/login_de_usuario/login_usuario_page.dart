@@ -32,19 +32,43 @@ class _LoginUsuarioPageState extends State<LoginUsuarioPage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          _buildLogo(size),
-          PrimaryEnterText(
-            controller: usuarioTextController,
-            title: 'Nome do usuario',
+          Column(
+            children: [
+              Hero(tag: 'titlo', child: _buildLogo('Bem-vindo', size)),
+              PrimaryEnterText(
+                controller: usuarioTextController,
+                title: 'Nome do usuario',
+              ),
+              SizedBox(height: size.height * .02),
+              SenhaEnterText(
+                senhaTextController: senhaTextController,
+                title: 'Palavra-passe',
+              ),
+              SizedBox(height: size.height * .08),
+              Material(
+                color: Colors.transparent,
+                child: Hero(
+                  tag: 'progressa',
+                  child: PrimaryButton(
+                      title: 'Entrar',
+                      onPressed: () async {
+                        Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                            pageBuilder:
+                                (context, animation, secondaryAnimation) {
+                              return TelaDeCarregamento();
+                            },
+                          ),
+                        );
+                        await Future.delayed(Duration(seconds: 4));
+                        Navigator.pop(context);
+                      }),
+                ),
+              ),
+              SizedBox(height: size.height * .01),
+            ],
           ),
-          SizedBox(height: size.height * .02),
-          SenhaEnterText(
-            senhaTextController: senhaTextController,
-            title: 'Palavra-passe',
-          ),
-          SizedBox(height: size.height * .08),
-          PrimaryButton(title: 'Entrar', onPressed: () {}),
-          SizedBox(height: size.height * .01),
           PrimaryButton(
             title: 'Criar conta',
             color: Colors.green,
@@ -65,16 +89,108 @@ class _LoginUsuarioPageState extends State<LoginUsuarioPage> {
     );
   }
 
-  SizedBox _buildLogo(Size size) {
+  Widget _buildLogo(String title, Size size, [TextStyle style]) {
+    return BuildLogo(
+      title: title,
+      style: style,
+    );
+  }
+}
+
+class BuildLogo extends StatelessWidget {
+  const BuildLogo({
+    Key key,
+    @required this.title,
+    this.style,
+  }) : super(key: key);
+
+  final String title;
+  final TextStyle style;
+
+  @override
+  Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return SizedBox(
       height: size.height * .40,
       child: Align(
         child: Text(
-          'Bem-vindo',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: size.height * .08,
-          ),
+          title,
+          style: style ??
+              TextStyle(
+                color: Colors.white,
+                fontSize: size.height * .08,
+              ),
+        ),
+      ),
+    );
+  }
+}
+
+class TelaDeCarregamento extends StatefulWidget {
+  const TelaDeCarregamento({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  _TelaDeCarregamentoState createState() => _TelaDeCarregamentoState();
+}
+
+class _TelaDeCarregamentoState extends State<TelaDeCarregamento>
+    with SingleTickerProviderStateMixin {
+  AnimationController _controller;
+
+  @override
+  void initState() {
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 300),
+    );
+    _controller.forward();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    return Scaffold(
+      backgroundColor: Color(0xff282936),
+      body: Container(
+        child: Column(
+          children: [
+            BuildLogo(
+              title: 'Entrando...',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: size.height * .05,
+              ),
+            ),
+            AnimatedBuilder(
+              animation: _controller,
+              builder: (context, animation) {
+                return ScaleTransition(
+                  alignment: Alignment.center,
+                  scale: _controller.drive(
+                    Tween(begin: 3, end: 1),
+                  ),
+                  child: Hero(
+                    tag: 'progress',
+                    child: Container(
+                      width: 60,
+                      height: 60,
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(90),
+                      ),
+                      child: CircularProgressIndicator(
+                        backgroundColor: Colors.white,
+                      ),
+                    ),
+                  ),
+                );
+              },
+            )
+          ],
         ),
       ),
     );

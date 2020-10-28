@@ -29,7 +29,7 @@ class _CadastroDeUsuarioPageState extends State<CadastroDeUsuarioPage> {
             context,
             state,
           );
-        } else {
+        } else if (state == EstadoDoCadastro.carregando) {
           return Center(
             child: CircularProgressIndicator(),
           );
