@@ -5,7 +5,7 @@ import 'package:sqflite/sqflite.dart';
 Future<void> prepareDatabase() {
   var sql = '''
     CREATE TABLE trabalhador (
-      idTrabalhador INTEGER,
+      idTrabalhador INTEGER PRIMARY KEY AUTOINCREMENT,
       bi TEXT,
       nome TEXT,
       data DATE,
@@ -15,16 +15,15 @@ Future<void> prepareDatabase() {
     );
 
     CREATE TABLE usuario (
-      idUsuario INTEGER,
-      bi TEXT,
+      idUsuario INTEGER PRIMARY KEY AUTOINCREMENT,
       nome TEXT,
-      data DATE,
-      morada TEXT,
+      userName TEXT,
+      senha TEXT,
       urlDaFoto TEXT
     );
 
     CREATE TABLE dinheiro (
-      idDinheiro INTEGER,
+      idDinheiro INTEGER PRIMARY KEY AUTOINCREMENT,
       valorPresente REAL,
       valorTotal REAL,
       data DATETIME,
@@ -35,6 +34,7 @@ Future<void> prepareDatabase() {
   var path = '${getDatabasesPath()}${Platform.pathSeparator}dados.db';
   return openDatabase(
     path,
+    version: 1,
     onCreate: (db, version) {
       return db.execute(sql);
     },

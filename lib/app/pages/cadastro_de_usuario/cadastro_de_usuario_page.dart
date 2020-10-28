@@ -33,7 +33,14 @@ class _CadastroDeUsuarioPageState extends State<CadastroDeUsuarioPage> {
           return Center(
             child: CircularProgressIndicator(),
           );
+        } else if (state == EstadoDoCadastro.finalizado) {
+          return Center(child: Icon(Icons.verified));
         }
+        return Container(
+          child: Center(
+            child: Text('Erro'),
+          ),
+        );
       },
     );
   }

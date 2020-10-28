@@ -16,13 +16,48 @@ class BaseDeDadosDeUsuariosImpl implements BaseDeDados<UsuarioModel> {
   var moradaColumn = 'morada';
   var urlDaFotoColumn = 'urlDaFoto';
 
+  var sql = '''
+    CREATE TABLE trabalhador (
+      idTrabalhador INTEGER PRIMARY KEY AUTOINCREMENT,
+      bi TEXT,
+      nome TEXT,
+      data DATE,
+      morada TEXT,
+      urlDaFoto TEXT,
+      salario REAL
+    );
+    ''';
+  var sql2 = '''
+
+    CREATE TABLE usuario (
+      idUsuario INTEGER PRIMARY KEY AUTOINCREMENT,
+      nome TEXT,
+      userName TEXT,
+      senha TEXT,
+      urlDaFoto TEXT
+    );
+
+    ''';
+  var sql3 = '''
+
+    CREATE TABLE dinheiro (
+      idDinheiro INTEGER PRIMARY KEY AUTOINCREMENT,
+      valorPresente REAL,
+      valorTotal REAL,
+      data DATETIME,
+      idTrabalhador INTEGER
+    );
+    ''';
+
   Future<Database> open() async {
-    await prepareDatabase();
     var path = '${getDatabasesPath()}${Platform.pathSeparator}dados.db';
     return openDatabase(
       path,
-      onCreate: (db, version) {
-        return db;
+      version: 3,
+      onUpgrade: (db, old, ne) {
+        db.execute(sql);
+        db.execute(sql2);
+        db.execute(sql3);
       },
     );
   }

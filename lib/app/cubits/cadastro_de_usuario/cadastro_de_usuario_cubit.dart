@@ -86,11 +86,23 @@ class CadastroDeUsuarioCubit extends Cubit<EstadoDoCadastro> {
         },
       );
       sair();
-    } else {}
+    } else {
+      await showDialog(
+        context: context,
+        builder: (_) => Center(
+          child: Text(
+            'Erro ${(result.swap() | null).toString()}',
+            style: TextStyle(
+              color: Colors.red,
+            ),
+          ),
+        ),
+      );
+    }
   }
 
   void cadastrar() async {
-    emit(EstadoDoCadastro.erro);
+    logar();
   }
 
   anunciarErro() {}
