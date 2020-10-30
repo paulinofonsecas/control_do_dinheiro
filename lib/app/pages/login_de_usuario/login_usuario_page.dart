@@ -19,6 +19,8 @@ class LoginUsuarioPage extends StatefulWidget {
 }
 
 class _LoginUsuarioPageState extends State<LoginUsuarioPage> {
+  bool canClose = true;
+
   @override
   initState() {
     super.initState();
@@ -27,29 +29,38 @@ class _LoginUsuarioPageState extends State<LoginUsuarioPage> {
   @override
   Widget build(BuildContext context) {
     var _controller = BlocProvider.of<LoginDeUsuarioCubit>(context);
-    return Scaffold(
-      body: BlocBuilder<LoginDeUsuarioCubit, EstadoDoCadastro>(
-        cubit: BlocProvider.of(context),
-        builder: (context, state) {
-          switch (state) {
-            case EstadoDoCadastro.inicial:
-              return DefaultView(
-                controller: _controller,
-                usuarioTextController: _controller.usuarioTextController,
-                senhaTextController: _controller.senhaTextController,
-              );
-              break;
-            case EstadoDoCadastro.carregando:
-              return TelaDeCarregamento();
-              break;
-            default:
-              return Container(
-                child: Center(
-                  child: Text('Erro'),
-                ),
-              );
-          }
-        },
+    return WillPopScope(
+      onWillPop: () async {
+        if (canClose)
+          return true;
+        else
+          return false;
+      },
+      child: Scaffold(
+        body: BlocBuilder<LoginDeUsuarioCubit, EstadoDoCadastro>(
+          cubit: BlocProvider.of(context),
+          builder: (context, state) {
+            switch (state) {
+              case EstadoDoCadastro.inicial:
+                return DefaultView(
+                  controller: _controller,
+                  usuarioTextController: _controller.usuarioTextController,
+                  senhaTextController: _controller.senhaTextController,
+                );
+                break;
+              case EstadoDoCadastro.carregando:
+                canClose = false;
+                return TelaDeCarregamento();
+                break;
+              default:
+                return Container(
+                  child: Center(
+                    child: Text('Erro'),
+                  ),
+                );
+            }
+          },
+        ),
       ),
     );
   }

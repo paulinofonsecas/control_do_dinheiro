@@ -27,46 +27,34 @@ class _TelaDeCarregamentoState extends State<TelaDeCarregamento>
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Color(0xff282936),
-      body: Container(
-        child: Column(
-          children: [
-            Logo(
-              title: 'Entrando...',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: size.height * .05,
+      body: Center(
+        child: AnimatedBuilder(
+          animation: _controller,
+          builder: (context, animation) {
+            return ScaleTransition(
+              alignment: Alignment.center,
+              scale: _controller.drive(
+                Tween(begin: 3, end: 1),
               ),
-            ),
-            AnimatedBuilder(
-              animation: _controller,
-              builder: (context, animation) {
-                return ScaleTransition(
-                  alignment: Alignment.center,
-                  scale: _controller.drive(
-                    Tween(begin: 3, end: 1),
+              child: Hero(
+                tag: 'progress',
+                child: Container(
+                  width: 60,
+                  height: 60,
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(90),
                   ),
-                  child: Hero(
-                    tag: 'progress',
-                    child: Container(
-                      width: 60,
-                      height: 60,
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(90),
-                      ),
-                      child: CircularProgressIndicator(
-                        backgroundColor: Colors.white,
-                      ),
-                    ),
+                  child: CircularProgressIndicator(
+                    backgroundColor: Colors.white,
                   ),
-                );
-              },
-            )
-          ],
+                ),
+              ),
+            );
+          },
         ),
       ),
     );
