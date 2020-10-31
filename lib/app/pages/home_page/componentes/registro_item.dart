@@ -39,66 +39,80 @@ class RegistroItem extends StatelessWidget {
         color: Colors.white.withOpacity(.06),
         borderRadius: BorderRadius.circular(15),
       ),
-      child: Column(
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: 60,
-                height: 60,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(90),
-                  image: DecorationImage(
-                    image: AssetImage('assets/profile.JPG'),
-                  ),
+      child: Body(registro: registro),
+    );
+  }
+}
+
+class Body extends StatelessWidget {
+  const Body({
+    Key key,
+    @required this.registro,
+  }) : super(key: key);
+
+  final Registro registro;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(90),
+                image: DecorationImage(
+                  image: AssetImage('assets/profile.JPG'),
                 ),
               ),
-              SizedBox(width: 10),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    registro.nomeDoFuncionario,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    registro.dateTime.toString().substring(0, 20 - 1),
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontSize: 18,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          SizedBox(height: 20),
-          MostrarDinheiro(
-            titlo: 'Entrada',
-            valor: registro.entrada,
-            color: Colors.greenAccent,
-          ),
-          SizedBox(height: 15),
-          MostrarDinheiro(
-            titlo: 'Saida',
-            valor: registro.saida,
-            color: Colors.redAccent,
-          ),
-          SizedBox(height: 25),
-          Align(
-            alignment: Alignment.topLeft,
-            child: ValorPresente(
-              valor: registro.presente,
-              color: Colors.purpleAccent,
             ),
+            SizedBox(width: 10),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  registro.nomeDoFuncionario,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  registro.dateTime.toString().substring(0, 20 - 1),
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontSize: 18,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+        SizedBox(height: 20),
+        MostrarDinheiro(
+          titlo: 'Entrada',
+          valor: registro.entrada,
+          color: Colors.greenAccent,
+        ),
+        SizedBox(height: 15),
+        MostrarDinheiro(
+          titlo: 'Saida',
+          valor: registro.saida,
+          color: Colors.redAccent,
+        ),
+        SizedBox(height: 25),
+        Align(
+          alignment: Alignment.topLeft,
+          child: ValorPresente(
+            valor: registro.presente,
+            color: Colors.purpleAccent,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

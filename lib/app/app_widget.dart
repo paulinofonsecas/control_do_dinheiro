@@ -1,4 +1,3 @@
-import 'package:control_do_dinheiro/app/cubits/login_de_usuario/login_de_usuario_cubit.dart';
 import 'package:control_do_dinheiro/app/pages/home_page/home_page.dart';
 import 'package:flutter/material.dart';
 
@@ -10,8 +9,9 @@ class AppWidget extends StatelessWidget {
         title: 'Moagem Money',
         theme: ThemeData(
           primarySwatch: Colors.blue,
+          scaffoldBackgroundColor: Color(0xff282936),
         ),
-        home: ExemploPaginaPrincipal()
+        home: HomePage()
         // home: BlocProvider(
         //   child: LoginUsuarioPage(),
         //   create: (_) => LoginDeUsuarioCubit(_),

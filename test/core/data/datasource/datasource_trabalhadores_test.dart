@@ -11,7 +11,7 @@ class DataBaseImplMock extends Mock implements BaseDeDadosDeTrabalhadoresImpl {}
 
 void main() {
   IDataSourceTrabalhador _dataSource;
-  BaseDeDados _dataBase;
+  BaseDeDados<TrabalhadorModel> _dataBase;
 
   setUpAll(() {
     _dataBase = DataBaseImplMock();
@@ -31,6 +31,32 @@ void main() {
       var result = await _dataSource.cadastrar(TrabalhadorModel());
       expect(result.swap() | null, isA<FalhaAoInserirNoBD>());
     });
+  });
+
+  group('Recuperar um trabalhador', () {
+    test(
+      'Pegar um trabalhador por id',
+      () async {
+        when(_dataBase.buscarPorId(any)).thenAnswer(
+          (_) async => Right(
+            TrabalhadorModel(
+              bi: '9090',
+              data: DateTime.now(),
+              idTrabalhador: 2,
+              morada: 'cuito',
+              nome: 'bie',
+              salario: 2000,
+              urlDaFoto: 'url',
+            ),
+          ),
+        );
+
+        var result = await _dataSource.buscarTrabalhadorPorId(1);
+        var trab = result | null;
+        expect(trab.nome, 'bie');
+        expect(trab.morada, 'cuito');
+      },
+    );
   });
 
   group('Eliminar trabalhador', () {

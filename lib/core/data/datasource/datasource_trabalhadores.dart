@@ -1,4 +1,3 @@
-
 import 'package:control_do_dinheiro/core/data/models/base_de_dados_implements/base_de_dados_de_trabalhadores.dart';
 import 'package:control_do_dinheiro/core/data/models/trabalhador_model.dart';
 import 'package:dartz/dartz.dart';
@@ -43,7 +42,9 @@ class DataSourceTrabalhador implements IDataSourceTrabalhador {
   @override
   Future<Either<Exception, TrabalhadorModel>> buscarTrabalhadorPorBi(
       String bi) async {
-    return _dataBase.buscarPorBi(bi);
+    Either<Exception, TrabalhadorModel> result =
+        await _dataBase.buscarPorBi(bi);
+    return result;
   }
 
   Future<Either<Exception, TrabalhadorModel>> buscarTrabalhadorPorNome(
@@ -61,4 +62,3 @@ class DataSourceTrabalhador implements IDataSourceTrabalhador {
     return _dataBase.eliminar(id);
   }
 }
-

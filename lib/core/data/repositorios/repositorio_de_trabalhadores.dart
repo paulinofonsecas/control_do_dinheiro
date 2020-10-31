@@ -2,7 +2,6 @@ import 'package:control_do_dinheiro/core/data/datasource/datasource_trabalhadore
 import 'package:control_do_dinheiro/core/modules/entitys/trabalhador.dart';
 import 'package:control_do_dinheiro/core/modules/repositorios/i_repositorio_de_trabalhadores.dart';
 import 'package:dartz/dartz.dart';
-import 'package:control_do_dinheiro/core/utils/forma_de_busca.dart';
 
 class RepositorioDeTrabalhadores implements IRepositorioDeTrabalhadores {
   IDataSourceTrabalhador _dataSource;
