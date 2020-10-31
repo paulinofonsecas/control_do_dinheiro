@@ -21,19 +21,19 @@ class _CadastroDeUsuarioPageState extends State<CadastroDeUsuarioPage> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return BlocBuilder<CadastroDeUsuarioCubit, EstadoDoCadastro>(
+    return BlocBuilder<CadastroDeUsuarioCubit, EstadoDeForulario>(
       builder: (context, state) {
-        if (state == EstadoDoCadastro.inicial) {
+        if (state == EstadoDeForulario.inicial) {
           return body(
             size,
             context,
             state,
           );
-        } else if (state == EstadoDoCadastro.carregando) {
+        } else if (state == EstadoDeForulario.carregando) {
           return Center(
             child: CircularProgressIndicator(),
           );
-        } else if (state == EstadoDoCadastro.finalizado) {
+        } else if (state == EstadoDeForulario.finalizado) {
           return Center(child: Icon(Icons.verified));
         }
         return Container(
@@ -45,7 +45,7 @@ class _CadastroDeUsuarioPageState extends State<CadastroDeUsuarioPage> {
     );
   }
 
-  Scaffold body(Size size, BuildContext context, EstadoDoCadastro state) {
+  Scaffold body(Size size, BuildContext context, EstadoDeForulario state) {
     var _controller = BlocProvider.of<CadastroDeUsuarioCubit>(context);
     return Scaffold(
       backgroundColor: Color(0xff282936),

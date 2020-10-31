@@ -31,18 +31,18 @@ class _LoginUsuarioPageState extends State<LoginUsuarioPage> {
           return false;
       },
       child: Scaffold(
-        body: BlocBuilder<LoginDeUsuarioCubit, EstadoDoCadastro>(
+        body: BlocBuilder<LoginDeUsuarioCubit, EstadoDeForulario>(
           cubit: BlocProvider.of(context),
           builder: (context, state) {
             switch (state) {
-              case EstadoDoCadastro.inicial:
+              case EstadoDeForulario.inicial:
                 return DefaultView(
                   controller: _controller,
                   usuarioTextController: _controller.usuarioTextController,
                   senhaTextController: _controller.senhaTextController,
                 );
                 break;
-              case EstadoDoCadastro.carregando:
+              case EstadoDeForulario.carregando:
                 canClose = false;
                 return TelaDeCarregamento();
                 break;

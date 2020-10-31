@@ -5,12 +5,12 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LoginDeUsuarioCubit extends Cubit<EstadoDoCadastro> {
+class LoginDeUsuarioCubit extends Cubit<EstadoDeForulario> {
   BuildContext context;
   TextEditingController usuarioTextController;
   TextEditingController senhaTextController;
 
-  LoginDeUsuarioCubit(this.context) : super(EstadoDoCadastro.inicial) {
+  LoginDeUsuarioCubit(this.context) : super(EstadoDeForulario.inicial) {
     usuarioTextController = TextEditingController();
     senhaTextController = TextEditingController();
   }
@@ -19,7 +19,7 @@ class LoginDeUsuarioCubit extends Cubit<EstadoDoCadastro> {
   String get senha => senhaTextController.text;
 
   entrar() async {
-    emit(EstadoDoCadastro.carregando);
+    emit(EstadoDeForulario.carregando);
     await Future.delayed(Duration(seconds: 2));
     var result = await login(userName, senha);
     if (result is Right) {
@@ -39,7 +39,7 @@ class LoginDeUsuarioCubit extends Cubit<EstadoDoCadastro> {
             },
           ));
     } else {
-      emit(EstadoDoCadastro.erro);
+      emit(EstadoDeForulario.erro);
     }
   }
 }

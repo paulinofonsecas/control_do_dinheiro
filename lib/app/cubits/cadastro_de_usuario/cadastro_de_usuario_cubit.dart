@@ -6,14 +6,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CadastroDeUsuarioCubit extends Cubit<EstadoDoCadastro> {
+class CadastroDeUsuarioCubit extends Cubit<EstadoDeForulario> {
   BuildContext context;
   TextEditingController nomeCompletoController;
   TextEditingController userName;
   TextEditingController senhaController;
   TextEditingController confirmaSenhaController;
 
-  CadastroDeUsuarioCubit(this.context) : super(EstadoDoCadastro.inicial) {
+  CadastroDeUsuarioCubit(this.context) : super(EstadoDeForulario.inicial) {
     nomeCompletoController = TextEditingController();
     userName = TextEditingController();
     senhaController = TextEditingController();
@@ -75,7 +75,7 @@ class CadastroDeUsuarioCubit extends Cubit<EstadoDoCadastro> {
   logar() async {
     verificarOsDados();
     var usuarioACadastrar = Usuario(nome: nome, userName: user, senha: senha);
-    emit(EstadoDoCadastro.carregando);
+    emit(EstadoDeForulario.carregando);
     var result = await Cadastrar.usuario().cadastrarUsuario(usuarioACadastrar);
     var estado = result | false;
     if (estado) {
@@ -108,7 +108,7 @@ class CadastroDeUsuarioCubit extends Cubit<EstadoDoCadastro> {
   anunciarErro() {}
 }
 
-enum EstadoDoCadastro {
+enum EstadoDeForulario {
   inicial,
   carregando,
   finalizado,
