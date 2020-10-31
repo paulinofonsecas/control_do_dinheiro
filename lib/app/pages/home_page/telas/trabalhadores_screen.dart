@@ -1,3 +1,4 @@
+import 'package:control_do_dinheiro/app/pages/home_page/componentes/mostrar_dinheiro.dart';
 import 'package:control_do_dinheiro/app/pages/home_page/telas/resgistros_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -62,6 +63,15 @@ class _TrabalhadoresScreenState extends State<TrabalhadoresScreen>
             ],
           ),
         ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Color(0xff41d1e2),
+          child: Icon(
+            Icons.add,
+            color: Color(0xff282936),
+          ),
+          onPressed: () {},
+        ),
       ),
     );
   }
@@ -88,20 +98,35 @@ class TrabalhadorItem extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(90),
               image: DecorationImage(
                 image: AssetImage('assets/profile.JPG'),
               ),
             ),
-            width: 200,
-            height: 200,
+            width: 150,
+            height: 150,
           ),
+          SizedBox(height: 10),
           Text(
             'Paulino Ciaia',
             style: TextStyle(
-              fontSize: 22,
+              fontSize: 30,
               color: Colors.white,
+              fontWeight: FontWeight.bold,
             ),
           ),
+          SizedBox(height: 25),
+          Column(
+            children: [
+              MostrarDinheiro(titlo: 'Entrada', valor: 40000),
+              SizedBox(height: 18),
+              MostrarDinheiro(
+                titlo: 'Saida',
+                valor: 10000,
+                color: Colors.red,
+              ),
+            ],
+          )
         ],
       ),
     );

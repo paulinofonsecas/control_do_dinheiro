@@ -90,7 +90,11 @@ class RegistroScreen extends StatelessWidget {
           ],
         ),
         floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
+          backgroundColor: Color(0xff41d1e2),
+          child: Icon(
+            Icons.add,
+            color: Color(0xff282936)
+          ),
           onPressed: () {},
         ),
       ),
@@ -104,6 +108,14 @@ class RegistroScreen extends StatelessWidget {
       isEmpty: registros.isEmpty,
       title: 'Registros',
       actions: [
+        IconButton(
+          onPressed: isEmpty ? () {} : null,
+          icon: Icon(
+            Icons.switch_camera_rounded,
+            color: isEmpty ? Colors.white : Colors.grey,
+            size: 40,
+          ),
+        ),
         IconButton(
           onPressed: isEmpty ? () {} : null,
           icon: Icon(

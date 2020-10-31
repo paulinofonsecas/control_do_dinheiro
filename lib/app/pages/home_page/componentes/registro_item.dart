@@ -32,7 +32,6 @@ class RegistroItem extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     return Container(
       width: double.infinity,
-      height: size.height * .60,
       margin: EdgeInsets.all(10),
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -93,20 +92,24 @@ class Body extends StatelessWidget {
           ],
         ),
         SizedBox(height: 20),
-        MostrarDinheiro(
-          titlo: 'Entrada',
-          valor: registro.entrada,
-          color: Colors.greenAccent,
-        ),
-        SizedBox(height: 15),
-        MostrarDinheiro(
-          titlo: 'Saida',
-          valor: registro.saida,
-          color: Colors.redAccent,
+        Row(
+          children: [
+            MostrarDinheiro(
+              titlo: 'Entrada',
+              valor: registro.entrada,
+              color: Colors.greenAccent,
+            ),
+            Spacer(),
+            MostrarDinheiro(
+              titlo: 'Saida',
+              valor: registro.saida,
+              color: Colors.redAccent,
+            ),
+          ],
         ),
         SizedBox(height: 25),
         Align(
-          alignment: Alignment.topLeft,
+          alignment: Alignment.topCenter,
           child: ValorPresente(
             valor: registro.presente,
             color: Colors.purpleAccent,
