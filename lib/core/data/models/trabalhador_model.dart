@@ -52,6 +52,17 @@ class TrabalhadorModel extends Trabalhador {
     );
   }
 
+  Trabalhador toTrabalhador() {
+    return Trabalhador(
+      idTrabalhador: idTrabalhador,
+      nome: nome,
+      data: data,
+      morada: morada,
+      urlDaFoto: urlDaFoto,
+      salario: salario,
+    );
+  }
+
   Map<String, dynamic> toMap() {
     return {
       'idTrabalhador': idTrabalhador,

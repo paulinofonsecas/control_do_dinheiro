@@ -15,6 +15,7 @@ class CadastroDeTrabalhadoresCubit extends Cubit<EstadoDeForulario> {
   TextEditingController nomeController;
   TextEditingController moradaController;
   TextEditingController salarioController;
+  String _urlDaImagem;
   DateTime dateTime;
   BuildContext context;
 
@@ -38,6 +39,7 @@ class CadastroDeTrabalhadoresCubit extends Cubit<EstadoDeForulario> {
       morada: morada,
       data: dateTime,
       salario: salario,
+      urlDaFoto: _urlDaImagem
     );
     var _dataBase = BaseDeDadosDeTrabalhadoresImpl();
     var _dataSource = DataSourceTrabalhador(_dataBase);
@@ -78,5 +80,9 @@ class CadastroDeTrabalhadoresCubit extends Cubit<EstadoDeForulario> {
       lastDate: DateTime.now(),
     );
     dateTime = dateResult;
+  }
+
+  void setUrlImage(String urlDaImagem) {
+    _urlDaImagem = urlDaImagem;
   }
 }

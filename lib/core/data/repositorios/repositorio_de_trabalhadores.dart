@@ -12,9 +12,9 @@ class RepositorioDeTrabalhadores implements IRepositorioDeTrabalhadores {
   @override
   Future<Either<Exception, List<Trabalhador>>>
       buscarTodosOsTrabalhadores() async {
-    Either<Exception, List<Trabalhador>> result =
+    var result =
         await _dataSource.buscarTodosOsTrabalhadores();
-    return result;
+    return Right(result.getOrElse(null).map((trabModel) => trabModel.toTrabalhador()).toList());
   }
 
   @override

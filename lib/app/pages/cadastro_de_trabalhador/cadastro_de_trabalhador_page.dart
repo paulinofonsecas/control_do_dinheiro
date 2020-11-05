@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:control_do_dinheiro/app/cubits/cadastro_de_trabalhadores/cadastro_de_trabalhadores_cubit.dart';
 import 'package:control_do_dinheiro/app/cubits/cadastro_de_usuario/cadastro_de_usuario_cubit.dart';
 import 'package:control_do_dinheiro/app/pages/cadastro_de_trabalhador/componentes/botao_para_selecionar_data_de_nascimento.dart';
 import 'package:control_do_dinheiro/app/pages/login_de_usuario/componenetes/usuario_enter_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 
 class CadastroDeTrabalhador extends StatefulWidget {
   @override
@@ -20,6 +23,7 @@ class _CadastroDeTrabalhadorState extends State<CadastroDeTrabalhador> {
   }
 
   CadastroDeTrabalhadoresCubit controller;
+  String urlImage;
 
   @override
   Widget build(BuildContext context) {
@@ -45,16 +49,32 @@ class _CadastroDeTrabalhadorState extends State<CadastroDeTrabalhador> {
       child: ListView(
         children: [
           Center(
-            child: Container(
-              width: 150,
-              height: 150,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
-                border: Border.all(
-                  color: Colors.white,
+            child: GestureDetector(
+              onTap: () async {
+                var pikedFile = await ImagePicker.platform
+                    .pickImage(source: ImageSource.camera);
+                var urlDaImagem = pikedFile.path;
+                setState(() => urlImage = urlDaImagem);
+                controller.setUrlImage(urlDaImagem);
+              },
+              child: Container(
+                width: 150,
+                height: 150,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100),
+                  border: Border.all(
+                    color: Colors.white,
+                  ),
+                  image: DecorationImage(
+                    image: urlImage == null
+                        ? AssetImage('assets/profile.JPG')
+                        : FileImage(
+                            File(urlImage),
+                          ),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-              child: Icon(Icons.person, size: 90),
             ),
           ),
           SizedBox(height: 20),

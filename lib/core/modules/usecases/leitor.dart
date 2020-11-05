@@ -37,7 +37,7 @@ Future<Either<Exception, Usuario>> login(String nome, String senha) async {
   } else {
     return Left(SenhaInvalida());
   }
-
+}
   Future<Either<Exception, List<Trabalhador>>> todosTrabalhadores() async {
     var _dataBase = BaseDeDadosDeTrabalhadoresImpl();
     var _dataSource = DataSourceTrabalhador(_dataBase);
@@ -45,4 +45,3 @@ Future<Either<Exception, Usuario>> login(String nome, String senha) async {
     var result = await _repositorio.buscarTodosOsTrabalhadores();
     return result;
   }
-}
