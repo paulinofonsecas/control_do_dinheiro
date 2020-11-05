@@ -60,32 +60,27 @@ class _CadastroDeTrabalhadorState extends State<CadastroDeTrabalhador> {
           SizedBox(height: 20),
           PrimaryEnterText(
             title: 'Nome Completo',
-            controller: null,
+            controller: controller.nomeController,
           ),
           SizedBox(height: 15),
           PrimaryEnterText(
             title: 'BI',
-            controller: null,
+            controller: controller.biController,
           ),
           SizedBox(height: 10),
           PrimaryEnterText(
             title: 'Morada',
-            controller: null,
+            controller: controller.moradaController,
           ),
           SizedBox(height: 15),
-          BotaoParaSelecionarADataDeNascimento(onTap: () async {
-            var dateResult = await showDatePicker(
-              context: context,
-              firstDate: DateTime(1950),
-              initialDate: DateTime(2005),
-              lastDate: DateTime.now(),
-            );
-          }),
+          BotaoParaSelecionarADataDeNascimento(
+            onTap: controller.selecionarData,
+          ),
           SizedBox(height: 15),
           PrimaryEnterText(
             title: 'Salário',
             keyboardType: TextInputType.number,
-            controller: salarioTextController,
+            controller: controller.salarioController,
           ),
           SizedBox(height: 30),
           buildButtons(),
@@ -100,25 +95,28 @@ class _CadastroDeTrabalhadorState extends State<CadastroDeTrabalhador> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: Colors.green,
-            ),
-            padding: EdgeInsets.symmetric(
-              horizontal: 40,
-              vertical: 10,
-            ),
-            child: Text(
-              'Salvar',
-              style: TextStyle(
-                fontSize: 24,
-                color: Colors.white,
+          GestureDetector(
+            onTap: controller.salvar,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Colors.green,
+              ),
+              padding: EdgeInsets.symmetric(
+                horizontal: 40,
+                vertical: 10,
+              ),
+              child: Text(
+                'Salvar',
+                style: TextStyle(
+                  fontSize: 24,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),
           GestureDetector(
-            onTap: controller.cancelar(),
+            onTap: controller.cancelar,
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),

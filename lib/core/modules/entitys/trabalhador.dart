@@ -24,4 +24,9 @@ class Trabalhador extends Pessoa {
           morada,
           urlDaFoto,
         );
+
+  @override
+  String toString() {
+    return 'Trabalhador(idTrabalhador: $idTrabalhador, bi: $bi, nome: $nome, data: $data, morada: $morada, urlDaFoto: $urlDaFoto, salario: $salario)';
+  }
 }

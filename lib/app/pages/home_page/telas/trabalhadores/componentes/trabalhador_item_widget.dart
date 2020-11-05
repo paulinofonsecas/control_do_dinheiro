@@ -1,10 +1,12 @@
-
 import 'package:control_do_dinheiro/app/pages/home_page/componentes/mostrar_dinheiro.dart';
+import 'package:control_do_dinheiro/core/modules/entitys/trabalhador.dart';
 import 'package:flutter/material.dart';
 
 class TrabalhadorItem extends StatelessWidget {
+  final Trabalhador trabalhador;
   const TrabalhadorItem({
     Key key,
+    this.trabalhador,
   }) : super(key: key);
 
   @override
@@ -33,7 +35,7 @@ class TrabalhadorItem extends StatelessWidget {
           ),
           SizedBox(height: 10),
           Text(
-            'Paulino Ciaia',
+            trabalhador.nome,
             style: TextStyle(
               fontSize: 30,
               color: Colors.white,

@@ -23,6 +23,7 @@ class BaseDeDadosDeTrabalhadoresImpl implements BaseDeDados<TrabalhadorModel> {
     var path = '${getDatabasesPath()}${Platform.pathSeparator}dados.db';
     return openDatabase(
       path,
+      version: 1,
       onCreate: (db, version) {
         return db;
       },

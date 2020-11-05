@@ -5,7 +5,7 @@ import 'package:control_do_dinheiro/app/pages/home_page/telas/resgistros_screen.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'trabalhadores/componentes/trabalhador_item_widget.dart';
+import 'componentes/trabalhador_item_widget.dart';
 
 class TrabalhadoresScreen extends StatefulWidget {
   const TrabalhadoresScreen({
@@ -80,7 +80,7 @@ class _TrabalhadoresScreenState extends State<TrabalhadoresScreen>
               context,
               MaterialPageRoute(
                 builder: (_) => BlocProvider(
-                  create: (context) => CadastroDeTrabalhadoresCubit(context),
+                  create: (con) => CadastroDeTrabalhadoresCubit(con),
                   child: CadastroDeTrabalhador(),
                 ),
               ),
@@ -91,4 +91,3 @@ class _TrabalhadoresScreenState extends State<TrabalhadoresScreen>
     );
   }
 }
-

@@ -1,4 +1,5 @@
 import 'package:control_do_dinheiro/core/data/datasource/datasource_trabalhadores.dart';
+import 'package:control_do_dinheiro/core/data/models/trabalhador_model.dart';
 import 'package:control_do_dinheiro/core/modules/entitys/trabalhador.dart';
 import 'package:control_do_dinheiro/core/modules/repositorios/i_repositorio_de_trabalhadores.dart';
 import 'package:dartz/dartz.dart';
@@ -33,7 +34,7 @@ class RepositorioDeTrabalhadores implements IRepositorioDeTrabalhadores {
 
   @override
   Future<Either<Exception, bool>> cadastrar(Trabalhador trabalhador) {
-    return _dataSource.cadastrar(trabalhador);
+    return _dataSource.cadastrar(TrabalhadorModel.fromTrabalhador(trabalhador));
   }
 
   @override

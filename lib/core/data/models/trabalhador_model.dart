@@ -21,6 +21,17 @@ class TrabalhadorModel extends Trabalhador {
     this.salario,
   });
 
+  factory TrabalhadorModel.fromTrabalhador(Trabalhador trabalhador) {
+    return TrabalhadorModel(
+      idTrabalhador: trabalhador.idTrabalhador,
+      nome: trabalhador.nome,
+      data: trabalhador.data,
+      morada: trabalhador.morada,
+      urlDaFoto: trabalhador.urlDaFoto,
+      salario: trabalhador.salario,
+    );
+  }
+
   TrabalhadorModel copyWith({
     int idTrabalhador,
     String bi,

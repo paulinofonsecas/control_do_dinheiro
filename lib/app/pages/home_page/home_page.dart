@@ -1,5 +1,5 @@
 import 'package:control_do_dinheiro/app/pages/home_page/telas/resgistros_screen.dart';
-import 'package:control_do_dinheiro/app/pages/home_page/telas/trabalhadores_screen.dart';
+import 'package:control_do_dinheiro/app/pages/home_page/telas/trabalhadores/trabalhadores_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
