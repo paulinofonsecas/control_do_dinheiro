@@ -82,7 +82,7 @@ class BaseDeDadosDeUsuariosImpl implements BaseDeDados<UsuarioModel> {
   Future<Either<Exception, UsuarioModel>> buscarPorId(int id) async {
     var db = await open();
     try {
-      var result = await db.query(table, where: 'id=?', whereArgs: [id]);
+      var result = await db.query(table, where: '$idUsuarioColumn=?', whereArgs: [id]);
       if (result != null && result.isNotEmpty) {
         var usuario = UsuarioModel.fromMap(result.first);
         return Right(usuario);
@@ -100,7 +100,7 @@ class BaseDeDadosDeUsuariosImpl implements BaseDeDados<UsuarioModel> {
   Future<Either<Exception, UsuarioModel>> buscarPorNome(String nome) async {
     var db = await open();
     try {
-      var result = await db.query(table, where: 'nome=?', whereArgs: [nome]);
+      var result = await db.query(table, where: 'userName=?', whereArgs: [nome]);
       if (result != null && result.isNotEmpty) {
         var usuario = UsuarioModel.fromMap(result.first);
         return Right(usuario);
