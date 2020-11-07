@@ -1,4 +1,5 @@
 import 'package:control_do_dinheiro/app/pages/home_page/componentes/registro_item.dart';
+import 'package:control_do_dinheiro/app/pages/registrar_venda/registrar_venda_page.dart';
 import 'package:flutter/material.dart';
 
 class RegistrosScreenController {
@@ -69,20 +70,6 @@ class RegistrosScreenController {
       MaterialPageRoute(
         builder: (context) => RegistrarVenda(),
       ),
-    );
-  }
-}
-
-class RegistrarVenda extends StatefulWidget {
-  @override
-  _RegistrarVendaState createState() => _RegistrarVendaState();
-}
-
-class _RegistrarVendaState extends State<RegistrarVenda> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body:Container()
     );
   }
 }

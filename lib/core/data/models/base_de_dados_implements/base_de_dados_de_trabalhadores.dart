@@ -19,13 +19,47 @@ class BaseDeDadosDeTrabalhadoresImpl implements BaseDeDados<TrabalhadorModel> {
   var urlDaFotoColumn = 'urlDaFoto';
   var salarioColumn = 'salario';
 
+  var sql = '''
+    CREATE TABLE trabalhador (
+      idTrabalhador INTEGER PRIMARY KEY AUTOINCREMENT,
+      bi TEXT,
+      nome TEXT,
+      data DATE,
+      morada TEXT,
+      urlDaFoto TEXT,
+      salario REAL
+    );''';
+
+  var sql2 = '''
+
+    CREATE TABLE usuario (
+      idUsuario INTEGER PRIMARY KEY AUTOINCREMENT,
+      nome TEXT,
+      userName TEXT,
+      senha TEXT,
+      urlDaFoto TEXT
+    );''';
+
+  var sql3 = '''
+    CREATE TABLE dinheiro (
+      idDinheiro INTEGER PRIMARY KEY AUTOINCREMENT,
+      entrada REAL,
+      saida REAL,
+      data DATETIME,
+      idTrabalhador INTEGER,
+      idDosAuxiliares TEXT
+    );
+    ''';
+
   Future<Database> open() async {
     var path = '${getDatabasesPath()}${Platform.pathSeparator}dados.db';
     return openDatabase(
       path,
       version: 1,
-      onCreate: (db, version) {
-        return db;
+      onUpgrade: (db, old, ne) {
+        db.execute(sql);
+        db.execute(sql2);
+        db.execute(sql3);
       },
     );
   }

@@ -1,18 +1,18 @@
-import 'package:control_do_dinheiro/app/controllers/registros_screen.dart';
+import 'package:control_do_dinheiro/app/componenets/custom_appbar.dart';
+import 'package:control_do_dinheiro/app/controllers/registros_screen_controller.dart';
 import 'package:control_do_dinheiro/app/pages/home_page/componentes/registro_item.dart';
-import 'package:control_do_dinheiro/app/pages/home_page/telas/registros_screen/componentes/custom_appbar.dart';
 import 'package:flutter/material.dart';
 
-class RegistroScreen extends StatefulWidget {
-  RegistroScreen({
+class RegistroPage extends StatefulWidget {
+  RegistroPage({
     Key key,
   }) : super(key: key);
 
   @override
-  _RegistroScreenState createState() => _RegistroScreenState();
+  _RegistroPageState createState() => _RegistroPageState();
 }
 
-class _RegistroScreenState extends State<RegistroScreen> {
+class _RegistroPageState extends State<RegistroPage> {
   RegistrosScreenController _controller;
 
   @override
@@ -26,28 +26,24 @@ class _RegistroScreenState extends State<RegistroScreen> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Color(0xff282936),
-        body: Column(
-          children: [
-            FutureBuilder<List<Registro>>(
-              future: _controller.registros,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  var registros = snapshot.data;
-                  return Column(
-                    children: [
-                      _buildCustomAppBar(registros: registros),
-                      SizedBox(height: 25),
-                      buildList(registroList: registros),
-                    ],
-                  );
-                } else {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-              },
-            ),
-          ],
+        body: FutureBuilder<List<Registro>>(
+          future: _controller.registros,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              var registros = snapshot.data;
+              return Column(
+                children: [
+                  _buildCustomAppBar(registros: registros),
+                  SizedBox(height: 25),
+                  buildList(registroList: registros),
+                ],
+              );
+            } else {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
         ),
         floatingActionButton: FloatingActionButton.extended(
           backgroundColor: Color(0xFF3CABD6),

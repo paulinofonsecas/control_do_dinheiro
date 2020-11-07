@@ -24,8 +24,8 @@ class BaseDeDadosDeUsuariosImpl implements BaseDeDados<UsuarioModel> {
       morada TEXT,
       urlDaFoto TEXT,
       salario REAL
-    );
-    ''';
+    );''';
+
   var sql2 = '''
 
     CREATE TABLE usuario (
@@ -34,25 +34,24 @@ class BaseDeDadosDeUsuariosImpl implements BaseDeDados<UsuarioModel> {
       userName TEXT,
       senha TEXT,
       urlDaFoto TEXT
-    );
+    );''';
 
-    ''';
   var sql3 = '''
-
     CREATE TABLE dinheiro (
       idDinheiro INTEGER PRIMARY KEY AUTOINCREMENT,
-      valorPresente REAL,
-      valorTotal REAL,
+      entrada REAL,
+      saida REAL,
       data DATETIME,
-      idTrabalhador INTEGER
+      idTrabalhador INTEGER,
+      idDosAuxiliares TEXT
     );
     ''';
 
   Future<Database> open() async {
-    var path = '${getDatabasesPath()}${Platform.pathSeparator}dados.db';
+    var path = '${await getDatabasesPath()}${Platform.pathSeparator}dados.db';
     return openDatabase(
       path,
-      version: 3,
+      version: 1,
       onUpgrade: (db, old, ne) {
         db.execute(sql);
         db.execute(sql2);

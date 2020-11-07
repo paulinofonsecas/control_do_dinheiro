@@ -33,7 +33,7 @@ class CustomAppBar extends StatelessWidget {
             ),
             Spacer(),
             Row(
-              children: actions,
+              children: actions ?? [],
             ),
           ],
         ),

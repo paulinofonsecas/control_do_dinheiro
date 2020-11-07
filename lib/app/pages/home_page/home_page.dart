@@ -1,5 +1,5 @@
-import 'package:control_do_dinheiro/app/pages/home_page/telas/resgistros_screen.dart';
-import 'package:control_do_dinheiro/app/pages/home_page/telas/trabalhadores/trabalhadores_screen.dart';
+import 'package:control_do_dinheiro/app/pages/registros_pages/resgistros_screen.dart';
+import 'package:control_do_dinheiro/app/pages/trabalhadores_pages/trabalhadores_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -22,8 +22,8 @@ class _HomePageState extends State<HomePage> {
       controller: _pageViewController,
       scrollDirection: Axis.horizontal,
       children: [
-        TrabalhadoresScreen(),
-        RegistroScreen(),
+        TrabalhadoresPage(),
+        RegistroPage(),
         Container(color: Colors.red),
       ],
     );

@@ -1,24 +1,24 @@
-import 'package:control_do_dinheiro/app/controllers/trabalhador_item_controlle.dart';
+import 'package:control_do_dinheiro/app/componenets/custom_appbar.dart';
+import 'package:control_do_dinheiro/app/controllers/trabalhador_item_controller.dart';
 import 'package:control_do_dinheiro/app/cubits/cadastro_de_trabalhadores/cadastro_de_trabalhadores_cubit.dart';
 import 'package:control_do_dinheiro/app/pages/cadastro_de_trabalhador/cadastro_de_trabalhador_page.dart';
-import 'package:control_do_dinheiro/app/pages/home_page/componentes/mostrar_dinheiro.dart';
-import 'package:control_do_dinheiro/app/pages/home_page/telas/resgistros_screen.dart';
 import 'package:control_do_dinheiro/core/modules/entitys/trabalhador.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'componentes/trabalhador_item_widget.dart';
+import 'components/trabalhador_item_widget.dart';
 
-class TrabalhadoresScreen extends StatefulWidget {
-  const TrabalhadoresScreen({
+
+class TrabalhadoresPage extends StatefulWidget {
+  const TrabalhadoresPage({
     Key key,
   }) : super(key: key);
 
   @override
-  _TrabalhadoresScreenState createState() => _TrabalhadoresScreenState();
+  _TrabalhadoresPageState createState() => _TrabalhadoresPageState();
 }
 
-class _TrabalhadoresScreenState extends State<TrabalhadoresScreen>
+class _TrabalhadoresPageState extends State<TrabalhadoresPage>
     with SingleTickerProviderStateMixin {
   PageController _pageViewController;
   TrabalhadorController _controller;
@@ -95,7 +95,7 @@ class _TrabalhadoresScreenState extends State<TrabalhadoresScreen>
 
   Widget buildListView(AsyncSnapshot<List<Trabalhador>> snapshot) {
     var trabalhadorList = snapshot.data;
-    if (trabalhadorList.isEmpty)
+    if (trabalhadorList != null && trabalhadorList.isEmpty)
       return Center(
         child: Text(
           'Sem trabalhadores cadastrados',

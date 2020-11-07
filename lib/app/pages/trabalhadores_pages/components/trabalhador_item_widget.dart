@@ -33,6 +33,7 @@ class TrabalhadorItem extends StatelessWidget {
                   image: (trabalhador.urlDaFoto == null || trabalhador.urlDaFoto == '')
                       ? AssetImage('assets/profile.JPG')
                       : FileImage(File(trabalhador.urlDaFoto)),
+                  fit: BoxFit.cover,
                 ),
               ),
               width: 100,
