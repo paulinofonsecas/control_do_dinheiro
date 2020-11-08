@@ -8,20 +8,20 @@ import 'escolher_trabalhador.dart';
 import 'mini_photo_profile.dart';
 
 class TrabalhadorPrincipal extends StatefulWidget {
-  const TrabalhadorPrincipal({
+  TrabalhadorPrincipal({
     Key key,
     @required this.trabalhadores,
+    @required this.trabalhadorPrincipal,
   }) : super(key: key);
 
   final List<Trabalhador> trabalhadores;
+  Trabalhador trabalhadorPrincipal;
 
   @override
   _TrabalhadorPrincipalState createState() => _TrabalhadorPrincipalState();
 }
 
 class _TrabalhadorPrincipalState extends State<TrabalhadorPrincipal> {
-  Trabalhador trabalhadorPrincipal;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,17 +41,17 @@ class _TrabalhadorPrincipalState extends State<TrabalhadorPrincipal> {
             direction: Axis.horizontal,
             spacing: 5,
             children: [
-              if (trabalhadorPrincipal != null)
+              if (widget.trabalhadorPrincipal != null)
                 MiniPhotoProfile(
-                  imageProvider: (trabalhadorPrincipal.urlDaFoto == null ||
-                          trabalhadorPrincipal.urlDaFoto == '')
-                      ? AssetImage('assets/profile.JPG')
-                      : FileImage(
-                          File(trabalhadorPrincipal.urlDaFoto),
-                        ),
+                  imageProvider:
+                      (widget.trabalhadorPrincipal.urlDaFoto == null ||
+                              widget.trabalhadorPrincipal.urlDaFoto == '')
+                          ? AssetImage('assets/profile.JPG')
+                          : FileImage(
+                              File(widget.trabalhadorPrincipal.urlDaFoto),
+                            ),
                 ),
               CustomBtnAdd(
-                icon: Icons.remove,
                 onTap: () async {
                   List<Trabalhador> trabalhadoresRetornados =
                       await Navigator.push(
@@ -64,14 +64,17 @@ class _TrabalhadorPrincipalState extends State<TrabalhadorPrincipal> {
                         return EscolherTrabalhador(
                           only: true,
                           trabalhadores: widget.trabalhadores,
-                          trabalhadoresSelecionados: [trabalhadorPrincipal],
+                          trabalhadoresSelecionados: [
+                            widget.trabalhadorPrincipal
+                          ],
                         );
                       },
                     ),
                   );
                   if (trabalhadoresRetornados != null)
                     setState(() {
-                      trabalhadorPrincipal = trabalhadoresRetornados.first;
+                      widget.trabalhadorPrincipal =
+                          trabalhadoresRetornados.first;
                     });
                 },
               ),

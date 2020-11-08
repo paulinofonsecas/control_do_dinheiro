@@ -26,8 +26,6 @@ class _RegistrarVendaState extends State<RegistrarVenda> {
   }
 
   Trabalhador trabalhadorPrincipal;
-  List<Trabalhador> trabalhadoresSelecionados = [];
-  List<Trabalhador> trabalhadores;
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +33,10 @@ class _RegistrarVendaState extends State<RegistrarVenda> {
       child: Scaffold(
         body: SingleChildScrollView(
           child: FutureBuilder<List<Trabalhador>>(
-              future: _controller.trabalhadores,
+              future: _controller.getTrabalhadores,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
-                  trabalhadores = snapshot.data;
+                  _controller.trabalhadores = snapshot.data;
                   return body();
                 } else {
                   return Center(child: CircularProgressIndicator());
@@ -67,9 +65,15 @@ class _RegistrarVendaState extends State<RegistrarVenda> {
               children: [
                 seccaoDeTrabalhadores(),
                 SizedBox(height: 40),
-                InputMoney(labelText: 'Entrada'),
+                InputMoney(
+                  labelText: 'Entrada',
+                  controller: _controller.entradaController,
+                ),
                 SizedBox(height: 10),
-                InputMoney(labelText: 'Saida'),
+                InputMoney(
+                  labelText: 'Saida',
+                  controller: _controller.saidaController,
+                ),
                 SizedBox(height: 40),
                 PrimaryButton(title: 'Registrar', onPressed: () {}),
                 SizedBox(height: 10),
@@ -91,11 +95,12 @@ class _RegistrarVendaState extends State<RegistrarVenda> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TrabalhadorPrincipal(
-          trabalhadores: trabalhadores,
+          trabalhadores: _controller.trabalhadores,
+          trabalhadorPrincipal: _controller.trabalhadorPrincipal,
         ),
         SizedBox(height: 30),
         TrabalhadoresAuxiliares(
-          trabalhadores: trabalhadores,
+          trabalhadores: _controller.trabalhadores,
         ),
       ],
     );

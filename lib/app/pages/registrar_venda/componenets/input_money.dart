@@ -4,13 +4,16 @@ class InputMoney extends StatelessWidget {
   const InputMoney({
     Key key,
     @required this.labelText,
+    this.controller,
   }) : super(key: key);
 
+  final TextEditingController controller;
   final String labelText;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
       keyboardType: TextInputType.number,
       style: TextStyle(
         fontSize: 18,

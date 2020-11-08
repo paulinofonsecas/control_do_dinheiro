@@ -8,7 +8,12 @@ import 'package:flutter/cupertino.dart';
 
 class RegistrarVendaController {
   IRepositorioDeTrabalhadores _repositorioDeTrabalhadores;
+  TextEditingController entradaController;
+  TextEditingController saidaController;
   BuildContext context;
+  List<Trabalhador> trabalhadoresSelecionados = [];
+  List<Trabalhador> trabalhadores;
+  Trabalhador trabalhadorPrincipal;
 
   RegistrarVendaController(this.context) {
     BaseDeDadosDeTrabalhadoresImpl _baseDeDados =
@@ -17,7 +22,7 @@ class RegistrarVendaController {
     _repositorioDeTrabalhadores = RepositorioDeTrabalhadores(_dataSource);
   }
 
-  Future<List<Trabalhador>> get trabalhadores async {
+  Future<List<Trabalhador>> get getTrabalhadores async {
     var result = await _repositorioDeTrabalhadores.buscarTodosOsTrabalhadores();
     if (result is Right) {
       return result | null;
