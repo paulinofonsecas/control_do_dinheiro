@@ -4,7 +4,9 @@ import 'package:dartz/dartz.dart';
 
 abstract class IRepositorioDeDinheiro {
   Future<Either<Exception, bool>> registrar(Dinheiro dinheiro);
-  Future<Either<Exception, Dinheiro>> buscarODinheiroAssociadoAoTrabalhador(
-      Trabalhador trabalhador);
-  
+  Future<Either<Exception, List<Dinheiro>>>
+      buscarTodoODinheiroAssociadoAoTrabalhador(
+    int idTrabalhador,
+  );
+  Future<Either<Exception, List<Dinheiro>>> todoODinheiro();
 }

@@ -1,6 +1,7 @@
-abstract class Dinheiro {
+class Dinheiro {
   final int idDinheiro;
-  final int idTrabalhador;
+  final List<int> idTrabalhadorAuxiliares;
+  final int idTrabalhadorPrincipal;
   final double entrada;
   final double saida;
   final DateTime data;
@@ -10,6 +11,7 @@ abstract class Dinheiro {
     this.entrada,
     this.saida,
     this.data,
-    this.idTrabalhador,}
-  );
+    this.idTrabalhadorPrincipal,
+    this.idTrabalhadorAuxiliares,
+  });
 }

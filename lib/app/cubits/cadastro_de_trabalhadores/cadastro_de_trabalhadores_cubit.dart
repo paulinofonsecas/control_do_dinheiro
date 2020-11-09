@@ -32,15 +32,22 @@ class CadastroDeTrabalhadoresCubit extends Cubit<EstadoDeForulario> {
   String get morada => moradaController.text;
   double get salario => double.parse(salarioController.text);
 
+  limparCampos() {
+    nomeController.clear;
+    biController.clear;
+    moradaController.clear;
+    salarioController.clear;
+    dateTime = null;
+  }
+
   salvar() async {
     var trabalhador = Trabalhador(
-      nome: nome,
-      bi: bi,
-      morada: morada,
-      data: dateTime,
-      salario: salario,
-      urlDaFoto: _urlDaImagem
-    );
+        nome: nome,
+        bi: bi,
+        morada: morada,
+        data: dateTime,
+        salario: salario,
+        urlDaFoto: _urlDaImagem);
     var _dataBase = BaseDeDadosDeTrabalhadoresImpl();
     var _dataSource = DataSourceTrabalhador(_dataBase);
     var _repositorioDeTrabalhadores = RepositorioDeTrabalhadores(_dataSource);
@@ -55,6 +62,7 @@ class CadastroDeTrabalhadoresCubit extends Cubit<EstadoDeForulario> {
             return Mensagem();
           },
         );
+        Navigator.pop(context);
       } else {
         await showDialog(
           context: context,
@@ -76,7 +84,7 @@ class CadastroDeTrabalhadoresCubit extends Cubit<EstadoDeForulario> {
     var dateResult = await showDatePicker(
       context: context,
       firstDate: DateTime(1950),
-      initialDate: DateTime(2005),
+      initialDate: dateTime ?? DateTime(2005),
       lastDate: DateTime.now(),
     );
     dateTime = dateResult;

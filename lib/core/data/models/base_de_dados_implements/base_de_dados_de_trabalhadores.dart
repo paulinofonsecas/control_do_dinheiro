@@ -52,7 +52,7 @@ class BaseDeDadosDeTrabalhadoresImpl implements BaseDeDados<TrabalhadorModel> {
     ''';
 
   Future<Database> open() async {
-    var path = '${getDatabasesPath()}${Platform.pathSeparator}dados.db';
+    var path = '${await getDatabasesPath()}${Platform.pathSeparator}dados.db';
     return openDatabase(
       path,
       version: 1,

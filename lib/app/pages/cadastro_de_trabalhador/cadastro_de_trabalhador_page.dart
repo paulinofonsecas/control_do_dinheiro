@@ -94,7 +94,11 @@ class _CadastroDeTrabalhadorState extends State<CadastroDeTrabalhador> {
           ),
           SizedBox(height: 15),
           BotaoParaSelecionarADataDeNascimento(
-            onTap: controller.selecionarData,
+            date: controller.dateTime,
+            onTap: () async {
+              await controller.selecionarData();
+              setState((){});
+            },
           ),
           SizedBox(height: 15),
           PrimaryEnterText(

@@ -7,21 +7,30 @@ class Mensagem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Icon(
-          Icons.verified,
-          size: 120,
-          color: Colors.green,
-        ),
-        Text(
-          'Cadastro conluído',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 22,
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: SimpleDialog(
+        children: [
+          Center(
+            child: Column(
+              children: [
+                Icon(
+                  Icons.verified,
+                  size: 120,
+                  color: Colors.green,
+                ),
+                Text(
+                  'Cadastro conluído',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 22,
+                  ),
+                )
+              ],
+            ),
           ),
-        )
-      ],
+        ],
+      ),
     );
   }
 }

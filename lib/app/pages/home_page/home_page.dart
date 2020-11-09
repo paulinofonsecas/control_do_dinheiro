@@ -1,5 +1,5 @@
 import 'package:control_do_dinheiro/app/pages/registros_pages/resgistros_screen.dart';
-import 'package:control_do_dinheiro/app/pages/trabalhadores_pages/trabalhadores_screen.dart';
+import 'package:control_do_dinheiro/app/pages/trabalhadores_page/trabalhadores_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,14 +18,16 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return PageView(
-      controller: _pageViewController,
-      scrollDirection: Axis.horizontal,
-      children: [
-        TrabalhadoresPage(),
-        RegistroPage(),
-        Container(color: Colors.red),
-      ],
+    return Scaffold(
+      body: PageView(
+        controller: _pageViewController,
+        scrollDirection: Axis.horizontal,
+        children: [
+          TrabalhadoresPage(),
+          RegistroPage(),
+          Container(color: Colors.red),
+        ],
+      ),
     );
   }
 }

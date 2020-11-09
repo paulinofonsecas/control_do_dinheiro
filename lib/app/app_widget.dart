@@ -12,14 +12,6 @@ class AppWidget extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Moagem Money',
-      builder: (context, navigator) {
-        return MultiBlocProvider(
-          providers: [
-            BlocProvider(create: (_) => SwitchMode()),
-          ],
-          child: navigator,
-        );
-      },
       theme: ThemeData(
         primarySwatch: Colors.blue,
         textTheme: TextTheme(
@@ -33,18 +25,9 @@ class AppWidget extends StatelessWidget {
       ),
       // home: HomePage(),
       home: BlocProvider(
-        child: LoginUsuarioPage(),
         create: (_) => LoginDeUsuarioCubit(_),
+        child: LoginUsuarioPage(),
       ),
     );
   }
-}
-
-class SwitchMode extends Cubit<bool> {
-  bool value;
-  SwitchMode() : super(true) {
-    value = false;
-  }
-
-  switcher() => value = !value;
 }

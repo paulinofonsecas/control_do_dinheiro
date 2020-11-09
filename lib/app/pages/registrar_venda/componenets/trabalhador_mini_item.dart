@@ -17,6 +17,15 @@ class TrabalhadorMiniItem extends StatelessWidget {
   final GestureTapCallback onPressed;
   final bool isSelected;
 
+  String doisNomes(String nomeCompleto) {
+    var partes = nomeCompleto.split(' ');
+    if (partes.length >= 2) {
+      return '${partes.first} ${partes.last}';
+    } else {
+      return partes.last;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -41,8 +50,13 @@ class TrabalhadorMiniItem extends StatelessWidget {
                 ),
                 SizedBox(width: 10),
                 Text(
-                  trabalhador.nome,
-                  style: TextStyle(color: Colors.black, fontSize: 25),
+                  doisNomes(trabalhador.nome),
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: true,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 25,
+                  ),
                 ),
               ],
             ),

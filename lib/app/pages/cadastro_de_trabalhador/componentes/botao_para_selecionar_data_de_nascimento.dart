@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 class BotaoParaSelecionarADataDeNascimento extends StatefulWidget {
   Function onTap;
+  DateTime date;
 
   BotaoParaSelecionarADataDeNascimento({
     Key key,
     this.onTap,
+    this.date,
   }) : super(key: key);
 
   @override
@@ -15,8 +17,6 @@ class BotaoParaSelecionarADataDeNascimento extends StatefulWidget {
 
 class _BotaoParaSelecionarADataDeNascimentoState
     extends State<BotaoParaSelecionarADataDeNascimento> {
-  DateTime date;
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -34,8 +34,8 @@ class _BotaoParaSelecionarADataDeNascimentoState
         ),
         child: Center(
           child: Text(
-            date != null
-                ? 'Nascido em ${date.toString().substring(0, 12 - 1)}'
+            widget.date != null
+                ? 'Nascido em ${widget.date.toString().substring(0, 12 - 1)}'
                 : 'Selecionar a data de nascimento',
             style: TextStyle(
               fontSize: 18,
@@ -47,5 +47,5 @@ class _BotaoParaSelecionarADataDeNascimentoState
     );
   }
 
-  bool get selecionado => date != null;
+  bool get selecionado => widget.date != null;
 }
