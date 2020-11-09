@@ -8,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'components/trabalhador_item_widget.dart';
 
-
 class TrabalhadoresPage extends StatefulWidget {
   const TrabalhadoresPage({
     Key key,
@@ -25,7 +24,7 @@ class _TrabalhadoresPageState extends State<TrabalhadoresPage>
 
   @override
   void initState() {
-    _controller = TrabalhadorController();
+    _controller = TrabalhadorController(context);
     _pageViewController = PageController(
       viewportFraction: .7,
       initialPage: 1,
@@ -33,9 +32,6 @@ class _TrabalhadoresPageState extends State<TrabalhadoresPage>
     );
     super.initState();
   }
-
-  var scale = 1.0;
-  var gndex = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -57,16 +53,18 @@ class _TrabalhadoresPageState extends State<TrabalhadoresPage>
                 ],
               ),
               FutureBuilder<List<Trabalhador>>(
-                  future: _controller.trabalhadores,
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done) {
-                      return buildListView(snapshot);
-                    } else {
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                  }),
+                future: _controller.trabalhadores,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    var trabalhadoresList = snapshot.data;
+                    return buildListView(trabalhadoresList);
+                  } else {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                },
+              ),
             ],
           ),
         ),
@@ -77,24 +75,13 @@ class _TrabalhadoresPageState extends State<TrabalhadoresPage>
             Icons.add,
             color: Color(0xff282936),
           ),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => BlocProvider(
-                  create: (con) => CadastroDeTrabalhadoresCubit(con),
-                  child: CadastroDeTrabalhador(),
-                ),
-              ),
-            );
-          },
+          onPressed: _controller.irParaAtelaDeCadastroDeTrabalhadores,
         ),
       ),
     );
   }
 
-  Widget buildListView(AsyncSnapshot<List<Trabalhador>> snapshot) {
-    var trabalhadorList = snapshot.data;
+  Widget buildListView(List<Trabalhador> trabalhadorList) {
     if (trabalhadorList != null && trabalhadorList.isEmpty)
       return Center(
         child: Text(
