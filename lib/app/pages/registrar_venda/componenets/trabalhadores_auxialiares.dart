@@ -11,9 +11,13 @@ class TrabalhadoresAuxiliares extends StatefulWidget {
   const TrabalhadoresAuxiliares({
     Key key,
     @required this.trabalhadores,
+    @required this.trabalhadoresSelecionados,
+    @required this.onTap,
   }) : super(key: key);
 
+  final Function onTap;
   final List<Trabalhador> trabalhadores;
+  final List<Trabalhador> trabalhadoresSelecionados;
 
   @override
   _TrabalhadoresAuxiliaresState createState() =>
@@ -21,8 +25,6 @@ class TrabalhadoresAuxiliares extends StatefulWidget {
 }
 
 class _TrabalhadoresAuxiliaresState extends State<TrabalhadoresAuxiliares> {
-  List<Trabalhador> trabalhadoresSelecionados = [];
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -42,11 +44,10 @@ class _TrabalhadoresAuxiliaresState extends State<TrabalhadoresAuxiliares> {
             alignment: WrapAlignment.start,
             spacing: 5,
             children: [
-              if (trabalhadoresSelecionados.isNotEmpty)
-                ...trabalhadoresSelecionados.map((t) {
+              if (widget.trabalhadoresSelecionados.isNotEmpty)
+                ...widget.trabalhadoresSelecionados.map((t) {
                   return MiniPhotoProfile(
-                  imageProvider: (t.urlDaFoto == null ||
-                            t.urlDaFoto == '')
+                    imageProvider: (t.urlDaFoto == null || t.urlDaFoto == '')
                         ? AssetImage('assets/profile.JPG')
                         : FileImage(
                             File(t.urlDaFoto),
@@ -54,27 +55,7 @@ class _TrabalhadoresAuxiliaresState extends State<TrabalhadoresAuxiliares> {
                   );
                 }).toList(),
               CustomBtnAdd(
-                onTap: () async {
-                  List<Trabalhador> trabalhadoresRetornados =
-                      await Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                      barrierDismissible: false,
-                      opaque: false,
-                      barrierColor: Colors.black.withOpacity(.4),
-                      pageBuilder: (context, anim1, anim2) {
-                        return EscolherTrabalhador(
-                          trabalhadores: widget.trabalhadores,
-                          trabalhadoresSelecionados: trabalhadoresSelecionados,
-                        );
-                      },
-                    ),
-                  );
-                  if (trabalhadoresRetornados != null)
-                    setState(() {
-                      trabalhadoresSelecionados = trabalhadoresRetornados;
-                    });
-                },
+                onTap: widget.onTap,
               ),
             ],
           ),

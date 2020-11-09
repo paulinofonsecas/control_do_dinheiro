@@ -77,26 +77,35 @@ class CadastroDeUsuarioCubit extends Cubit<EstadoDeForulario> {
     var usuarioACadastrar = Usuario(nome: nome, userName: user, senha: senha);
     emit(EstadoDeForulario.carregando);
     var result = await Cadastrar.usuario().cadastrarUsuario(usuarioACadastrar);
-    var estado = result | false;
-    if (estado) {
+    var confirmacao = result | false;
+    if (confirmacao) {
       await showDialog(
         context: context,
         builder: (context) {
-          return Mensagem();
+          return Mensagem(
+            mensagem: 'Registro feito com sucesso!',
+            icon: Icon(
+              Icons.verified,
+              size: 120,
+              color: Colors.green,
+            ),
+          );
         },
       );
-      sair();
+      Navigator.pop(context);
     } else {
       await showDialog(
         context: context,
-        builder: (_) => Center(
-          child: Text(
-            'Erro ${(result.swap() | null).toString()}',
-            style: TextStyle(
+        builder: (context) {
+          return Mensagem(
+            mensagem: 'Ocorreu um erro ao registrar o usuario',
+            icon: Icon(
+              Icons.error_outline,
+              size: 120,
               color: Colors.red,
             ),
-          ),
-        ),
+          );
+        },
       );
     }
   }

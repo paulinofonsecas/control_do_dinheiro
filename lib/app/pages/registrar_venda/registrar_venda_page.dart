@@ -75,11 +75,14 @@ class _RegistrarVendaState extends State<RegistrarVenda> {
                   controller: _controller.saidaController,
                 ),
                 SizedBox(height: 40),
-                PrimaryButton(title: 'Registrar', onPressed: () {}),
+                PrimaryButton(
+                  title: 'Registrar',
+                  onPressed: _controller.registrar,
+                ),
                 SizedBox(height: 10),
                 PrimaryButton(
                   title: 'Cancelar',
-                  onPressed: () {},
+                  onPressed: _controller.sair,
                   color: Colors.red,
                 ),
               ],
@@ -97,10 +100,56 @@ class _RegistrarVendaState extends State<RegistrarVenda> {
         TrabalhadorPrincipal(
           trabalhadores: _controller.trabalhadores,
           trabalhadorPrincipal: _controller.trabalhadorPrincipal,
+          onTap: () async {
+            List<Trabalhador> trabalhadoresRetornados = await Navigator.push(
+              context,
+              PageRouteBuilder(
+                barrierDismissible: false,
+                opaque: false,
+                barrierColor: Colors.black.withOpacity(.4),
+                pageBuilder: (context, anim1, anim2) {
+                  return EscolherTrabalhador(
+                    only: true,
+                    trabalhadores: _controller.trabalhadores,
+                    trabalhadoresSelecionados: [
+                      _controller.trabalhadorPrincipal
+                    ],
+                  );
+                },
+              ),
+            );
+            if (trabalhadoresRetornados != null)
+              setState(() {
+                _controller.trabalhadorPrincipal =
+                    trabalhadoresRetornados.first;
+              });
+          },
         ),
         SizedBox(height: 30),
         TrabalhadoresAuxiliares(
           trabalhadores: _controller.trabalhadores,
+          trabalhadoresSelecionados: _controller.trabalhadoresSelecionados,
+          onTap: () async {
+            List<Trabalhador> trabalhadoresRetornados = await Navigator.push(
+              context,
+              PageRouteBuilder(
+                barrierDismissible: false,
+                opaque: false,
+                barrierColor: Colors.black.withOpacity(.4),
+                pageBuilder: (context, anim1, anim2) {
+                  return EscolherTrabalhador(
+                    trabalhadores: _controller.trabalhadores,
+                    trabalhadoresSelecionados:
+                        _controller.trabalhadoresSelecionados,
+                  );
+                },
+              ),
+            );
+            if (trabalhadoresRetornados != null)
+              setState(() {
+                _controller.trabalhadoresSelecionados = trabalhadoresRetornados;
+              });
+          },
         ),
       ],
     );

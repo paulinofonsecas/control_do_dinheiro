@@ -59,7 +59,14 @@ class CadastroDeTrabalhadoresCubit extends Cubit<EstadoDeForulario> {
         await showDialog(
           context: context,
           builder: (context) {
-            return Mensagem();
+            return Mensagem(
+              mensagem: 'Cadastro feito com sucesso!',
+              icon: Icon(
+                Icons.verified,
+                size: 120,
+                color: Colors.green,
+              ),
+            );
           },
         );
         Navigator.pop(context);
@@ -67,8 +74,13 @@ class CadastroDeTrabalhadoresCubit extends Cubit<EstadoDeForulario> {
         await showDialog(
           context: context,
           builder: (context) {
-            return Center(
-              child: Text('Erro ao cadastrar o trabalhador'),
+            return Mensagem(
+              mensagem: 'Ocorreu um erro ao cadastrar o trabalhador',
+              icon: Icon(
+                Icons.error_outline,
+                size: 120,
+                color: Colors.red,
+              ),
             );
           },
         );

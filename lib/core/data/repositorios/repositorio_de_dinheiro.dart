@@ -7,10 +7,15 @@ import 'package:dartz/dartz.dart';
 class RepositorioDeDinheiro implements IRepositorioDeDinheiro {
   IDataSourceDinheiro _dataSource;
 
+  RepositorioDeDinheiro(this._dataSource);
+
   @override
   Future<Either<Exception, List<Dinheiro>>>
-      buscarTodoODinheiroAssociadoAoTrabalhador(int idTrabalhador) {
-    return _dataSource.buscarTodoODinheiroAssociadoAoTrabalhador(idTrabalhador);
+      buscarTodoODinheiroAssociadoAoTrabalhador(int idTrabalhador) async {
+    var result = await _dataSource
+        .buscarTodoODinheiroAssociadoAoTrabalhador(idTrabalhador);
+    var list = result | [];
+    return Right(list.map((d) => d.toDinheiro()).toList());
   }
 
   @override
@@ -22,7 +27,7 @@ class RepositorioDeDinheiro implements IRepositorioDeDinheiro {
   @override
   Future<Either<Exception, List<Dinheiro>>> todoODinheiro() async {
     var result = await _dataSource.todoODinheiro();
-    var list = result | null;
+    var list = result | [];
     return Right(list.map((d) => d.toDinheiro()).toList());
   }
 }

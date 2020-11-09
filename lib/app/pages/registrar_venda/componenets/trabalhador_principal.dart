@@ -4,7 +4,6 @@ import 'package:control_do_dinheiro/core/modules/entitys/trabalhador.dart';
 import 'package:flutter/material.dart';
 
 import 'custom_btn_add.dart';
-import 'escolher_trabalhador.dart';
 import 'mini_photo_profile.dart';
 
 class TrabalhadorPrincipal extends StatefulWidget {
@@ -12,10 +11,12 @@ class TrabalhadorPrincipal extends StatefulWidget {
     Key key,
     @required this.trabalhadores,
     @required this.trabalhadorPrincipal,
+    @required this.onTap,
   }) : super(key: key);
 
+  final Function onTap;
   final List<Trabalhador> trabalhadores;
-  Trabalhador trabalhadorPrincipal;
+  final Trabalhador trabalhadorPrincipal;
 
   @override
   _TrabalhadorPrincipalState createState() => _TrabalhadorPrincipalState();
@@ -52,31 +53,7 @@ class _TrabalhadorPrincipalState extends State<TrabalhadorPrincipal> {
                             ),
                 ),
               CustomBtnAdd(
-                onTap: () async {
-                  List<Trabalhador> trabalhadoresRetornados =
-                      await Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                      barrierDismissible: false,
-                      opaque: false,
-                      barrierColor: Colors.black.withOpacity(.4),
-                      pageBuilder: (context, anim1, anim2) {
-                        return EscolherTrabalhador(
-                          only: true,
-                          trabalhadores: widget.trabalhadores,
-                          trabalhadoresSelecionados: [
-                            widget.trabalhadorPrincipal
-                          ],
-                        );
-                      },
-                    ),
-                  );
-                  if (trabalhadoresRetornados != null)
-                    setState(() {
-                      widget.trabalhadorPrincipal =
-                          trabalhadoresRetornados.first;
-                    });
-                },
+                onTap: widget.onTap,
               ),
             ],
           ),

@@ -4,32 +4,48 @@ import 'package:flutter/foundation.dart';
 
 import 'package:control_do_dinheiro/core/modules/entitys/dinheiro.dart';
 
+/* 
+idDinheiro INTEGER PRIMARY KEY AUTOINCREMENT,
+      entrada REAL,
+      saida REAL,
+      data DATETIME,
+      idTrabalhador INTEGER,
+      idDosAuxiliares TEXT
+      */
+
 class DinheiroModel extends Dinheiro {
   final int idDinheiro;
-  final List<int> idTrabalhadorAuxiliares;
-  final int idTrabalhadorPrincipal;
+  final List<int> idDosAuxiliares;
+  final int idTrabalhador;
   final double entrada;
   final double saida;
   final DateTime data;
 
   DinheiroModel({
     this.idDinheiro,
-    this.idTrabalhadorAuxiliares,
-    this.idTrabalhadorPrincipal,
+    this.idDosAuxiliares,
+    this.idTrabalhador,
     this.entrada,
     this.saida,
     this.data,
   });
 
   factory DinheiroModel.fromDinheiro(Dinheiro d) {
-    return DinheiroModel();
+    return DinheiroModel(
+      idDinheiro: d.idDinheiro,
+      idTrabalhador: d.idTrabalhador,
+      idDosAuxiliares: d.idDosAuxiliares,
+      entrada: d.entrada,
+      saida: d.saida,
+      data: d.data,
+    );
   }
 
   Dinheiro toDinheiro() {
     return Dinheiro(
       idDinheiro: idDinheiro,
-      idTrabalhadorPrincipal: idTrabalhadorPrincipal,
-      idTrabalhadorAuxiliares: idTrabalhadorAuxiliares,
+      idTrabalhador: idTrabalhador,
+      idDosAuxiliares: idDosAuxiliares,
       entrada: entrada,
       saida: saida,
       data: data,
@@ -46,10 +62,10 @@ class DinheiroModel extends Dinheiro {
   }) {
     return DinheiroModel(
       idDinheiro: idDinheiro ?? this.idDinheiro,
-      idTrabalhadorAuxiliares:
-          idTrabalhadorAuxiliares ?? this.idTrabalhadorAuxiliares,
-      idTrabalhadorPrincipal:
-          idTrabalhadorPrincipal ?? this.idTrabalhadorPrincipal,
+      idDosAuxiliares:
+          idTrabalhadorAuxiliares ?? this.idDosAuxiliares,
+      idTrabalhador:
+          idTrabalhadorPrincipal ?? this.idTrabalhador,
       entrada: entrada ?? this.entrada,
       saida: saida ?? this.saida,
       data: data ?? this.data,
@@ -59,24 +75,26 @@ class DinheiroModel extends Dinheiro {
   Map<String, dynamic> toMap() {
     return {
       'idDinheiro': idDinheiro,
-      'idTrabalhadorAuxiliares': idTrabalhadorAuxiliares,
-      'idTrabalhadorPrincipal': idTrabalhadorPrincipal,
+      'idDosAuxiliares': jsonEncode(idDosAuxiliares),
+      'idTrabalhador': idTrabalhador,
       'entrada': entrada,
       'saida': saida,
-      'data': data?.millisecondsSinceEpoch,
+      'data': data?.toString(),
     };
   }
 
   factory DinheiroModel.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
+    if (map['entrada'] == null) return null;
 
     return DinheiroModel(
       idDinheiro: map['idDinheiro'],
-      idTrabalhadorAuxiliares: List<int>.from(map['idTrabalhadorAuxiliares']),
-      idTrabalhadorPrincipal: map['idTrabalhadorPrincipal'],
+      idDosAuxiliares:
+          List<int>.from(jsonDecode(map['idDosAuxiliares'])),
+      idTrabalhador: map['idTrabalhador'],
       entrada: map['entrada'],
       saida: map['saida'],
-      data: DateTime.fromMillisecondsSinceEpoch(map['data']),
+      data: DateTime.parse(map['data']),
     );
   }
 
@@ -87,7 +105,7 @@ class DinheiroModel extends Dinheiro {
 
   @override
   String toString() {
-    return 'DinheiroModel(idDinheiro: $idDinheiro, idTrabalhadorAuxiliares: $idTrabalhadorAuxiliares, idTrabalhadorPrincipal: $idTrabalhadorPrincipal, entrada: $entrada, saida: $saida, data: $data)';
+    return 'DinheiroModel(idDinheiro: $idDinheiro, idTrabalhadorAuxiliares: $idDosAuxiliares, idTrabalhadorPrincipal: $idTrabalhador, entrada: $entrada, saida: $saida, data: $data)';
   }
 
   @override
@@ -96,8 +114,8 @@ class DinheiroModel extends Dinheiro {
 
     return o is DinheiroModel &&
         o.idDinheiro == idDinheiro &&
-        listEquals(o.idTrabalhadorAuxiliares, idTrabalhadorAuxiliares) &&
-        o.idTrabalhadorPrincipal == idTrabalhadorPrincipal &&
+        listEquals(o.idDosAuxiliares, idDosAuxiliares) &&
+        o.idTrabalhador == idTrabalhador &&
         o.entrada == entrada &&
         o.saida == saida &&
         o.data == data;
@@ -106,8 +124,8 @@ class DinheiroModel extends Dinheiro {
   @override
   int get hashCode {
     return idDinheiro.hashCode ^
-        idTrabalhadorAuxiliares.hashCode ^
-        idTrabalhadorPrincipal.hashCode ^
+        idDosAuxiliares.hashCode ^
+        idTrabalhador.hashCode ^
         entrada.hashCode ^
         saida.hashCode ^
         data.hashCode;

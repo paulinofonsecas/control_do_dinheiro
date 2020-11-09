@@ -30,18 +30,24 @@ Future<Either<Exception, Usuario>> login(String nome, String senha) async {
   var _dataSource = DataSourceUsuarios(_baseDeDados);
   var _repositorioDeUsuarios = RepositorioDeUsuarios(_dataSource);
   var result = await _repositorioDeUsuarios.buscarUsuarioPorNome(nome);
-  var usuario = result | null;
-  var pass = usuario.senha;
-  if (pass == senha) {
-    return Right(usuario);
+  if (result is Right) {
+    var usuario = result | null;
+
+    var pass = usuario.senha;
+    if (pass == senha) {
+      return Right(usuario);
+    } else {
+      return Left(SenhaInvalida());
+    }
   } else {
-    return Left(SenhaInvalida());
-  }
-}
-  Future<Either<Exception, List<Trabalhador>>> todosTrabalhadores() async {
-    var _dataBase = BaseDeDadosDeTrabalhadoresImpl();
-    var _dataSource = DataSourceTrabalhador(_dataBase);
-    var _repositorio = RepositorioDeTrabalhadores(_dataSource);
-    var result = await _repositorio.buscarTodosOsTrabalhadores();
     return result;
   }
+}
+
+Future<Either<Exception, List<Trabalhador>>> todosTrabalhadores() async {
+  var _dataBase = BaseDeDadosDeTrabalhadoresImpl();
+  var _dataSource = DataSourceTrabalhador(_dataBase);
+  var _repositorio = RepositorioDeTrabalhadores(_dataSource);
+  var result = await _repositorio.buscarTodosOsTrabalhadores();
+  return result;
+}

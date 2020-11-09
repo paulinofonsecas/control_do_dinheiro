@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 class Mensagem extends StatelessWidget {
   const Mensagem({
     Key key,
+    @required this.icon,
+    @required this.mensagem,
   }) : super(key: key);
+
+  final String mensagem;
+  final Icon icon;
 
   @override
   Widget build(BuildContext context) {
@@ -14,13 +19,9 @@ class Mensagem extends StatelessWidget {
           Center(
             child: Column(
               children: [
-                Icon(
-                  Icons.verified,
-                  size: 120,
-                  color: Colors.green,
-                ),
+                icon,
                 Text(
-                  'Cadastro conluído',
+                  mensagem,
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 22,

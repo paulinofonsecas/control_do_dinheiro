@@ -1,3 +1,4 @@
+import 'package:control_do_dinheiro/core/data/models/base_de_dados_implements/base_de_dados_do_dinheiro.dart';
 import 'package:control_do_dinheiro/core/data/models/dinheiro_model.dart';
 import 'package:dartz/dartz.dart';
 
@@ -18,12 +19,12 @@ class DataSourceDinheiro implements IDataSourceDinheiro {
   @override
   Future<Either<Exception, List<DinheiroModel>>>
       buscarTodoODinheiroAssociadoAoTrabalhador(int idTrabalhador) {
-    return _baseDeDados.buscarPeloIdDoTrabalhador(idTrabalhador);
+    return _baseDeDados.buscarTodoODinheiroDoTrabalhador(idTrabalhador);
   }
 
   @override
   Future<Either<Exception, bool>> registrar(DinheiroModel dinheiro) {
-    return _baseDeDados.registrarNovoDinheiro(dinheiro);
+    return _baseDeDados.registrarDinheiro(dinheiro);
   }
 
   @override

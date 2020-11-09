@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:control_do_dinheiro/core/data/models/data_base.dart';
+import 'package:control_do_dinheiro/core/data/erros/erros.dart';
 import 'package:control_do_dinheiro/core/data/models/dinheiro_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:sqflite/sqflite.dart';
@@ -60,15 +60,50 @@ class BaseDeDadosDoDinheiro {
     );
   }
 
-  Future<Either<Exception, List<DinheiroModel>>> buscarTodoODinheiroDoTrabalhador(int id) async {
+  Future<Either<Exception, List<DinheiroModel>>> todoODinheiro() async {
     var db = await open();
     try {
-      var queryResult = await db.query(table, where: 'id=?', whereArgs: [id]);
-      if (queryResult != null || queryResult.isNotEmpty) {
-        var todoDinheiroDoTrabalhador = queryResult.map((e) => DinheiroModel.fromMap(e)).toList();
-        return Right(todoDinheiroDoTrabalhador);
+      var queryResult = await db.query(table);
+      if (queryResult != null && queryResult.isNotEmpty) {
+        var todoODinheiro =
+            queryResult.map((d) => DinheiroModel.fromMap(d)).toList();
+        return Right(todoODinheiro);
+      } else {
+        return Left(BDVazio());
       }
+    } catch (e) {
+      return Left(ErroInterno());
     }
   }
 
+  Future<Either<Exception, bool>> registrarDinheiro(
+    DinheiroModel dinheiroModel,
+  ) async {
+    var db = await open();
+    try {
+      await db.insert(table, dinheiroModel.toMap());
+      return Right(true);
+    } catch (e) {
+      return Left(ErroInterno());
+    }
+  }
+
+  Future<Either<Exception, List<DinheiroModel>>>
+      buscarTodoODinheiroDoTrabalhador(
+    int id,
+  ) async {
+    var db = await open();
+    try {
+      var queryResult = await db.query(table, where: 'id=?', whereArgs: [id]);
+      if (queryResult != null && queryResult.isNotEmpty) {
+        var todoDinheiroDoTrabalhador =
+            queryResult.map((e) => DinheiroModel.fromMap(e)).toList();
+        return Right(todoDinheiroDoTrabalhador);
+      } else {
+        return Left(ElementoNaoExistenteNaBD());
+      }
+    } catch (e) {
+      return Left(ErroInterno());
+    }
+  }
 }

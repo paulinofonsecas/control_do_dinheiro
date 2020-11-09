@@ -6,4 +6,4 @@ class FalhaAoInserirNoBD extends ErrosInternos {}
 
 class ElementoNaoExistenteNaBD extends ErrosInternos {}
 
-class BDVazia extends ErrosInternos {}
+class BDVazio extends ErrosInternos {}

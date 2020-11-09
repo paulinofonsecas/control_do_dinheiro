@@ -143,7 +143,7 @@ class BaseDeDadosDeTrabalhadoresImpl implements BaseDeDados<TrabalhadorModel> {
             listInMap.map((map) => TrabalhadorModel.fromMap(map)).toList();
         return Right(trabalhadorList);
       } else {
-        return Left(BDVazia());
+        return Left(BDVazio());
       }
     } catch (e) {
       return Left(e);

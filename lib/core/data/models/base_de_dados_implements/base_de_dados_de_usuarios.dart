@@ -146,7 +146,7 @@ class BaseDeDadosDeUsuariosImpl implements BaseDeDados<UsuarioModel> {
             listOnMap.map((map) => UsuarioModel.fromMap(map));
         return Right(usuarioModelList);
       } else {
-        return Left(BDVazia());
+        return Left(BDVazio());
       }
     } catch (e) {
       return Left(ErroInterno());

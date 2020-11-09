@@ -1,67 +1,55 @@
 import 'package:control_do_dinheiro/app/pages/home_page/componentes/registro_item.dart';
 import 'package:control_do_dinheiro/app/pages/registrar_venda/registrar_venda_page.dart';
+import 'package:control_do_dinheiro/core/data/datasource/datasource_dinheiro.dart';
+import 'package:control_do_dinheiro/core/data/datasource/datasource_trabalhadores.dart';
+import 'package:control_do_dinheiro/core/data/models/base_de_dados_implements/base_de_dados_de_trabalhadores.dart';
+import 'package:control_do_dinheiro/core/data/models/base_de_dados_implements/base_de_dados_do_dinheiro.dart';
+import 'package:control_do_dinheiro/core/data/repositorios/repositorio_de_dinheiro.dart';
+import 'package:control_do_dinheiro/core/data/repositorios/repositorio_de_trabalhadores.dart';
+import 'package:control_do_dinheiro/core/modules/repositorios/i_repositorio_de_dinheiro.dart';
+import 'package:control_do_dinheiro/core/modules/repositorios/i_repositorio_de_trabalhadores.dart';
 import 'package:flutter/material.dart';
 
 class RegistrosScreenController {
+  IRepositorioDeTrabalhadores _repositorioDeTrabalhadores;
+  IRepositorioDeDinheiro _repositorioDeDinheiro;
+
   BuildContext context;
 
-  RegistrosScreenController(this.context);
-
-  final _registros = [
-    Registro(
-        nomeDoFuncionario: 'Cailoy',
-        entrada: 18000,
-        saida: 1500,
-        dateTime: DateTime.now()),
-    Registro(
-        nomeDoFuncionario: 'Mario',
-        entrada: 16500,
-        saida: 2500,
-        dateTime: DateTime.now()),
-    Registro(
-        nomeDoFuncionario: 'Zeca',
-        entrada: 17150,
-        saida: 3000,
-        dateTime: DateTime.now()),
-    Registro(
-        nomeDoFuncionario: 'Kapapelo',
-        entrada: 22300,
-        saida: 500,
-        dateTime: DateTime.now()),
-    Registro(
-        nomeDoFuncionario: 'Cailoy',
-        entrada: 24850,
-        saida: 1000,
-        dateTime: DateTime.now()),
-    Registro(
-        nomeDoFuncionario: 'Cailoy',
-        entrada: 10220,
-        saida: 2200,
-        dateTime: DateTime.now()),
-    Registro(
-        nomeDoFuncionario: 'Cailoy',
-        entrada: 7000,
-        saida: 200,
-        dateTime: DateTime.now()),
-    Registro(
-        nomeDoFuncionario: 'Mario',
-        entrada: 8350,
-        saida: 500,
-        dateTime: DateTime.now()),
-    Registro(
-        nomeDoFuncionario: 'Zeca',
-        entrada: 14200,
-        saida: 6000,
-        dateTime: DateTime.now()),
-    Registro(
-        nomeDoFuncionario: 'Kapapelo',
-        entrada: 5300,
-        saida: 8000,
-        dateTime: DateTime.now()),
-  ];
+  RegistrosScreenController(this.context) {
+    configuracaoDoRepositorioDoDinheiro();
+    configuracaoDoRepositorioDeTrabalhadores();
+  }
 
   Future<List<Registro>> get registros async {
-    return _registros;
+    var result = await _repositorioDeDinheiro.todoODinheiro();
+    var dinheiroList = result | [];
+    List<Registro> regis = [];
+    dinheiroList.forEach((dinheiro) async {
+      var trabalhadorSearch = await _repositorioDeTrabalhadores
+          .buscarTrabalhadorPorId(dinheiro.idTrabalhador);
+      var trabalhador = trabalhadorSearch | null;
+      regis.add(Registro(
+        nomeDoFuncionario: trabalhador.nome,
+        entrada: dinheiro.entrada,
+        saida: dinheiro.saida,
+        dateTime: dinheiro.data,
+      ));
+    });
+    return regis;
+  }
+
+  void configuracaoDoRepositorioDeTrabalhadores() {
+    BaseDeDadosDeTrabalhadoresImpl _baseDeDados =
+        BaseDeDadosDeTrabalhadoresImpl();
+    IDataSourceTrabalhador _dataSource = DataSourceTrabalhador(_baseDeDados);
+    _repositorioDeTrabalhadores = RepositorioDeTrabalhadores(_dataSource);
+  }
+
+  void configuracaoDoRepositorioDoDinheiro() {
+    BaseDeDadosDoDinheiro _baseDeDados = BaseDeDadosDoDinheiro();
+    IDataSourceDinheiro _dataSource = DataSourceDinheiro(_baseDeDados);
+    _repositorioDeDinheiro = RepositorioDeDinheiro(_dataSource);
   }
 
   void registrarVenda() {
