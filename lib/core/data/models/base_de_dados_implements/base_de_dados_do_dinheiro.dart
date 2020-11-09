@@ -94,7 +94,7 @@ class BaseDeDadosDoDinheiro {
   ) async {
     var db = await open();
     try {
-      var queryResult = await db.query(table, where: 'id=?', whereArgs: [id]);
+      var queryResult = await db.query(table, where: 'idTrabalhador=?', whereArgs: [id]);
       if (queryResult != null && queryResult.isNotEmpty) {
         var todoDinheiroDoTrabalhador =
             queryResult.map((e) => DinheiroModel.fromMap(e)).toList();

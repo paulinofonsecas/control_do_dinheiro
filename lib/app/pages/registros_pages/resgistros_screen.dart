@@ -27,9 +27,9 @@ class _RegistroPageState extends State<RegistroPage> {
       child: Scaffold(
         backgroundColor: Color(0xff282936),
         body: FutureBuilder<List<Registro>>(
-          future: _controller.registros,
+          future: _controller.registros(),
           builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasData) {
               var registros = snapshot.data;
               return Column(
                 children: [
@@ -45,15 +45,9 @@ class _RegistroPageState extends State<RegistroPage> {
             }
           },
         ),
-        floatingActionButton: FloatingActionButton.extended(
+        floatingActionButton: FloatingActionButton(
           backgroundColor: Color(0xFF3CABD6),
-          icon: Icon(Icons.add, color: Color(0xff282936)),
-          label: Text(
-            'Rigistrar venda',
-            style: TextStyle(
-              fontSize: 18,
-            ),
-          ),
+          child: Icon(Icons.add, color: Color(0xff282936)),
           onPressed: _controller.registrarVenda,
         ),
       ),
@@ -74,10 +68,14 @@ class _RegistroPageState extends State<RegistroPage> {
                   ),
                 ),
               )
-            : ListView.builder(
-                itemCount: registros.length,
-                itemBuilder: (_, index) =>
-                    RegistroItem(registro: registros[index]),
+            : ClipRRect(
+                clipBehavior: Clip.hardEdge,
+                borderRadius: BorderRadius.circular(20),
+                child: ListView.builder(
+                  itemCount: registros.length,
+                  itemBuilder: (_, index) =>
+                      RegistroItem(registro: registros[index]),
+                ),
               ),
       ),
     );

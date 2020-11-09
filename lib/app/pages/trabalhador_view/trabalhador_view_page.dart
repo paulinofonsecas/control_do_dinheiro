@@ -52,7 +52,7 @@ class _TrabalhadorViewPageState extends State<TrabalhadorViewPage> {
               ),
             ),
             FutureBuilder<List<Registro>>(
-              future: controller.registros,
+              future: controller.registros(widget.trabalhador),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   var registros = snapshot.data;
@@ -86,9 +86,12 @@ class _TrabalhadorViewPageState extends State<TrabalhadorViewPage> {
               height: size.width * .4,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: FileImage(
-                    File(widget.trabalhador.urlDaFoto),
-                  ),
+                  image: (widget.trabalhador.urlDaFoto == null ||
+                          widget.trabalhador.urlDaFoto == '')
+                      ? AssetImage('assets/profile.JPG')
+                      : FileImage(
+                          File(widget.trabalhador.urlDaFoto),
+                        ),
                   fit: BoxFit.cover,
                 ),
                 borderRadius: BorderRadius.circular(size.width * .4),

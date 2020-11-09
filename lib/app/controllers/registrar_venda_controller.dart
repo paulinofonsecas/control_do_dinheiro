@@ -1,4 +1,5 @@
 import 'package:control_do_dinheiro/app/componenets/mensagem.dart';
+import 'package:control_do_dinheiro/app/pages/home_page/home_page.dart';
 import 'package:control_do_dinheiro/core/data/datasource/datasource_dinheiro.dart';
 import 'package:control_do_dinheiro/core/data/datasource/datasource_trabalhadores.dart';
 import 'package:control_do_dinheiro/core/data/models/base_de_dados_implements/base_de_dados_de_trabalhadores.dart';
@@ -18,8 +19,8 @@ class RegistrarVendaController {
   IRepositorioDeTrabalhadores _repositorioDeTrabalhadores;
   IRepositorioDeDinheiro _repositorioDeDinheiro;
 
-  Trabalhador trabalhadorPrincipal = Trabalhador();
-  List<Trabalhador> _trabalhadoresSelecionados = [];
+  Trabalhador trabalhadorPrincipal;
+  List<Trabalhador> trabalhadoresSelecionados = [];
   List<Trabalhador> trabalhadores;
 
   TextEditingController entradaController;
@@ -30,12 +31,6 @@ class RegistrarVendaController {
     saidaController = TextEditingController();
     configuracaoDoRepositorioDeTrabalhadores();
     configuracaoDoRepositorioDoDinheiro();
-  }
-
-  List<Trabalhador> get trabalhadoresSelecionados => _trabalhadoresSelecionados;
-
-  set trabalhadoresSelecionados(List<Trabalhador> trabs) {
-    _trabalhadoresSelecionados = trabs;
   }
 
   void configuracaoDoRepositorioDoDinheiro() {
@@ -88,7 +83,21 @@ class RegistrarVendaController {
           );
         },
       );
-      Navigator.pop(context);
+      Navigator.pushReplacement(
+        context,
+        PageRouteBuilder(
+          transitionDuration: Duration(milliseconds: 500),
+          pageBuilder: (context, animation, secondaryAnimation) {
+            return HomePage();
+          },
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(
+              opacity: animation,
+              child: child,
+            );
+          },
+        ),
+      );
     } else {
       await showDialog(
         context: context,
@@ -106,5 +115,21 @@ class RegistrarVendaController {
     }
   }
 
-  sair() {}
+  sair() {
+    Navigator.pushReplacement(
+      context,
+      PageRouteBuilder(
+        transitionDuration: Duration(milliseconds: 500),
+        pageBuilder: (context, animation, secondaryAnimation) {
+          return HomePage();
+        },
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return FadeTransition(
+            opacity: animation,
+            child: child,
+          );
+        },
+      ),
+    );
+  }
 }

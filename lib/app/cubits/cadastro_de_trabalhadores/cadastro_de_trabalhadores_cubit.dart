@@ -1,5 +1,6 @@
 import 'package:control_do_dinheiro/app/componenets/mensagem.dart';
 import 'package:control_do_dinheiro/app/cubits/cadastro_de_usuario/cadastro_de_usuario_cubit.dart';
+import 'package:control_do_dinheiro/app/pages/home_page/home_page.dart';
 import 'package:control_do_dinheiro/core/data/datasource/datasource_trabalhadores.dart';
 import 'package:control_do_dinheiro/core/data/models/base_de_dados_implements/base_de_dados_de_trabalhadores.dart';
 import 'package:control_do_dinheiro/core/data/repositorios/repositorio_de_trabalhadores.dart';
@@ -69,7 +70,22 @@ class CadastroDeTrabalhadoresCubit extends Cubit<EstadoDeForulario> {
             );
           },
         );
-        Navigator.pop(context);
+        Navigator.pushReplacement(
+          context,
+          PageRouteBuilder(
+            transitionDuration: Duration(milliseconds: 500),
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return HomePage();
+            },
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          ),
+        );
       } else {
         await showDialog(
           context: context,

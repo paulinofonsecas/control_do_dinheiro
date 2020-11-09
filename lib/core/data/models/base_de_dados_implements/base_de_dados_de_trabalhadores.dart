@@ -79,7 +79,7 @@ class BaseDeDadosDeTrabalhadoresImpl implements BaseDeDados<TrabalhadorModel> {
   Future<Either<Exception, TrabalhadorModel>> buscarPorId(int id) async {
     var db = await open();
     try {
-      var listMap = await db.query(table, where: 'id=?', whereArgs: [id]);
+      var listMap = await db.query(table, where: 'idTrabalhador=?', whereArgs: [id]);
       if (listMap != null && listMap.isNotEmpty) {
         var trabalhadorModel = TrabalhadorModel.fromMap(listMap.first);
         return Right(trabalhadorModel);

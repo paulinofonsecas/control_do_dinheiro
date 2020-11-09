@@ -1,5 +1,6 @@
 import 'package:control_do_dinheiro/app/componenets/custom_appbar.dart';
 import 'package:control_do_dinheiro/app/controllers/registrar_venda_controller.dart';
+import 'package:control_do_dinheiro/app/pages/home_page/home_page.dart';
 import 'package:control_do_dinheiro/app/pages/login_de_usuario/componenetes/primary_button.dart';
 import 'package:control_do_dinheiro/core/modules/entitys/trabalhador.dart';
 import 'package:flutter/material.dart';
@@ -111,9 +112,7 @@ class _RegistrarVendaState extends State<RegistrarVenda> {
                   return EscolherTrabalhador(
                     only: true,
                     trabalhadores: _controller.trabalhadores,
-                    trabalhadoresSelecionados: [
-                      _controller.trabalhadorPrincipal
-                    ],
+                    trabalhadoresSelecionados: [],
                   );
                 },
               ),

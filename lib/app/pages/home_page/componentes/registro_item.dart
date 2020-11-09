@@ -1,9 +1,14 @@
+import 'dart:io';
+
 import 'package:control_do_dinheiro/app/pages/home_page/componentes/valor_presente.dart';
+import 'package:control_do_dinheiro/core/modules/entitys/trabalhador.dart';
 import 'package:flutter/material.dart';
 
 import 'mostrar_dinheiro.dart';
 
 class Registro {
+  final Trabalhador trabalhador;
+  final List<Trabalhador> trabalhadoresAuxiliares;
   final String nomeDoFuncionario;
   final double entrada;
   final double saida;
@@ -11,6 +16,8 @@ class Registro {
   final DateTime dateTime;
 
   Registro({
+    this.trabalhador,
+    this.trabalhadoresAuxiliares,
     this.nomeDoFuncionario,
     this.entrada,
     this.saida,
@@ -57,16 +64,7 @@ class Body extends StatelessWidget {
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              width: 60,
-              height: 60,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(90),
-                image: DecorationImage(
-                  image: AssetImage('assets/profile.JPG'),
-                ),
-              ),
-            ),
+            Avatar(trabalhador: registro.trabalhador),
             SizedBox(width: 10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,6 +88,26 @@ class Body extends StatelessWidget {
             ),
           ],
         ),
+        SizedBox(width: 10),
+        // if (registro.trabalhadoresAuxiliares != null)
+        //   SingleChildScrollView(
+        //     scrollDirection: Axis.horizontal,
+        //     child: Row(
+        //       children: registro.trabalhadoresAuxiliares.map(
+        //         (trab) {
+        //           return Padding(
+        //             padding: const EdgeInsets.all(8.0),
+        //             child: Column(
+        //               children: [
+        //                 Avatar(trabalhador: trab),
+        //                 Text(trab.nome),
+        //               ],
+        //             ),
+        //           );
+        //         },
+        //       ).toList(),
+        //     ),
+        //   ),
         SizedBox(height: 20),
         Row(
           children: [
@@ -115,6 +133,34 @@ class Body extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class Avatar extends StatelessWidget {
+  const Avatar({
+    Key key,
+    @required this.trabalhador,
+  }) : super(key: key);
+
+  final Trabalhador trabalhador;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 60,
+      height: 60,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(90),
+        image: DecorationImage(
+          image: (trabalhador.urlDaFoto == null || trabalhador.urlDaFoto == '')
+              ? AssetImage('assets/profile.JPG')
+              : FileImage(
+                  File(trabalhador.urlDaFoto),
+                ),
+          fit: BoxFit.cover,
+        ),
+      ),
     );
   }
 }
