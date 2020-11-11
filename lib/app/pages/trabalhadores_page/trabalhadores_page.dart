@@ -52,23 +52,29 @@ class _TrabalhadoresPageState extends State<TrabalhadoresPage>
                   ),
                 ],
               ),
-              FutureBuilder<List<Trabalhador>>(
-                future: _controller.trabalhadores,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    var trabalhadoresList = snapshot.data;
-                    return buildListView(trabalhadoresList);
-                  } else {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                },
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    FutureBuilder<List<Trabalhador>>(
+                      future: _controller.trabalhadores,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.done) {
+                          var trabalhadorList = snapshot.data;
+                          if (trabalhadorList.isEmpty)
+                            return semDadosAMostrar();
+                          else
+                            return buildListView(trabalhadorList);
+                        } else
+                          return Center(child: CircularProgressIndicator());
+                      },
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: FloatingActionButton(
           backgroundColor: Color(0xff41d1e2),
           child: Icon(
@@ -82,17 +88,6 @@ class _TrabalhadoresPageState extends State<TrabalhadoresPage>
   }
 
   Widget buildListView(List<Trabalhador> trabalhadorList) {
-    if (trabalhadorList != null && trabalhadorList.isEmpty)
-      return Center(
-        child: Text(
-          'Sem trabalhadores cadastrados',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      );
     return Container(
       width: double.infinity,
       height: 500,
@@ -108,6 +103,22 @@ class _TrabalhadoresPageState extends State<TrabalhadoresPage>
               trabalhador: trabalhador,
             );
           },
+        ),
+      ),
+    );
+  }
+
+  Widget semDadosAMostrar() {
+    return Container(
+      child: Center(
+        child: Text(
+          'Sem trabalhadores cadastrados',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );

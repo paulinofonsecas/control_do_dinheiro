@@ -29,8 +29,11 @@ class _RegistroPageState extends State<RegistroPage> {
         body: FutureBuilder<List<Registro>>(
           future: _controller.getRegistros(),
           builder: (context, snapshot) {
-            if (snapshot.hasData) {
+            if (snapshot.connectionState == ConnectionState.done) {
               var registros = snapshot.data;
+              if (registros == null) {
+                return infoSemRegistro();
+              }
               return Column(
                 children: [
                   _buildCustomAppBar(registros: registros),
@@ -54,29 +57,27 @@ class _RegistroPageState extends State<RegistroPage> {
     );
   }
 
+  Center infoSemRegistro() {
+    return Center(
+      child: Text(
+        'Sem registros',
+        style: TextStyle(fontSize: 30),
+      ),
+    );
+  }
+
   Expanded buildList({List<Registro> registroList}) {
     var registros = registroList;
     return Expanded(
       child: Container(
-        child: registros.isEmpty
-            ? Center(
-                child: Text(
-                  'Sem registros',
-                  style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.white,
-                  ),
-                ),
-              )
-            : ClipRRect(
-                clipBehavior: Clip.hardEdge,
-                borderRadius: BorderRadius.circular(20),
-                child: ListView.builder(
-                  itemCount: registros.length,
-                  itemBuilder: (_, index) =>
-                      RegistroItem(registro: registros[index]),
-                ),
-              ),
+        child: ClipRRect(
+          clipBehavior: Clip.hardEdge,
+          borderRadius: BorderRadius.circular(20),
+          child: ListView.builder(
+            itemCount: registros.length,
+            itemBuilder: (_, index) => RegistroItem(registro: registros[index]),
+          ),
+        ),
       ),
     );
   }
