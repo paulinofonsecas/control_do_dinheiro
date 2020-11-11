@@ -29,14 +29,12 @@ class PrimaryEnterText extends StatelessWidget {
           labelStyle: TextStyle(
             color: Colors.white,
           ),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
+          border: UnderlineInputBorder(
             borderSide: BorderSide(
               color: Colors.white,
             ),
           ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
+          enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(
               color: Colors.white,
             ),

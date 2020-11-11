@@ -30,18 +30,6 @@ class EstatisticaController {
     7: 0.0,
   };
 
-  Future<List<Registro>> get getRegistros async {
-    return registros();
-  }
-
-  criarOsDados() async {
-    var registros = await getRegistros;
-    registros.forEach((r) {
-      var semana = r.dateTime.weekday;
-      entradaNaSemana[semana] += r.entrada;
-      saidaNaSemana[semana] += r.saida;
-    });
-  }
 
   TextStyle getTitleStyle(double value) {
     return TextStyle(color: Colors.white);
@@ -68,7 +56,20 @@ class EstatisticaController {
     }
   }
 
+  Future<List<Registro>> get getRegistros async {
+    return registros();
+  }
+  criarOsDados() async {
+    var registros = await getRegistros;
+    registros.forEach((r) {
+      var semana = r.dateTime.weekday;
+      entradaNaSemana[semana] += r.entrada;
+      saidaNaSemana[semana] += r.saida;
+    });
+  }
+
   List<BarChartGroupData> get getBarGroupsOfWeek {
+    criarOsDados();
     return List.generate(
       7,
       (index) {

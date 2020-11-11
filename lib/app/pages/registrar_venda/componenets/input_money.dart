@@ -31,12 +31,10 @@ class InputMoney extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+        focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.blue[300]),
         ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+        enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.grey[300]),
         ),
       ),

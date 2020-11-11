@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:control_do_dinheiro/app/pages/trabalhador_view/trabalhador_view_page.dart';
+import 'package:control_do_dinheiro/app/utils/get_dois_nomes.dart';
 import 'package:control_do_dinheiro/core/modules/entitys/trabalhador.dart';
 import 'package:flutter/material.dart';
 
@@ -53,7 +54,7 @@ class TrabalhadorItem extends StatelessWidget {
               ),
               SizedBox(height: 10),
               Text(
-                trabalhador.nome,
+                doisNomes(trabalhador.nome),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 30,

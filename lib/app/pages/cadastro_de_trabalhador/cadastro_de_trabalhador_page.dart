@@ -123,7 +123,7 @@ class _CadastroDeTrabalhadorState extends State<CadastroDeTrabalhador> {
             onTap: controller.salvar,
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
+                borderRadius: BorderRadius.circular(10),
                 color: Colors.green,
               ),
               padding: EdgeInsets.symmetric(
@@ -143,7 +143,7 @@ class _CadastroDeTrabalhadorState extends State<CadastroDeTrabalhador> {
             onTap: controller.cancelar,
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
+                borderRadius: BorderRadius.circular(10),
                 color: Colors.red,
               ),
               padding: EdgeInsets.symmetric(

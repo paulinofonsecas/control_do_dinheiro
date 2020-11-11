@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:control_do_dinheiro/app/pages/home_page/componentes/valor_presente.dart';
+import 'package:control_do_dinheiro/app/utils/get_dois_nomes.dart';
 import 'package:control_do_dinheiro/core/modules/entitys/trabalhador.dart';
 import 'package:flutter/material.dart';
 
@@ -70,7 +71,7 @@ class Body extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  registro.nomeDoFuncionario,
+                  doisNomes(registro.nomeDoFuncionario),
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 30,

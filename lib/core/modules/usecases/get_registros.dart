@@ -51,7 +51,10 @@ Future<void> _criarRegistros(Dinheiro dinheiro, List<Registro> regis) async {
 }
 
 Future<List<Registro>> registros() async {
-  var dinheiroList = (await _repositorioDeDinheiro.todoODinheiro()) | [];
+  _configuracaoDoRepositorioDeTrabalhadores();
+  _configuracaoDoRepositorioDoDinheiro();
+  var result = await _repositorioDeDinheiro.todoODinheiro();
+  var dinheiroList = result | [];
   List<Registro> regis = [];
   for (var dinheiro in dinheiroList) {
     await _criarRegistros(dinheiro, regis);

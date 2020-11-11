@@ -31,7 +31,7 @@ class _RegistroPageState extends State<RegistroPage> {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               var registros = snapshot.data;
-              if (registros == null) {
+              if (registros.isEmpty) {
                 return infoSemRegistro();
               }
               return Column(

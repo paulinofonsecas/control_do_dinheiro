@@ -27,7 +27,7 @@ class _BotaoParaSelecionarADataDeNascimentoState
         padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(.05),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(10),
           border: Border.all(
             color: Colors.white,
           ),
