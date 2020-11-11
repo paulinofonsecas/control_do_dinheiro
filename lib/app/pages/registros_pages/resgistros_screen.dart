@@ -1,5 +1,6 @@
 import 'package:control_do_dinheiro/app/componenets/custom_appbar.dart';
 import 'package:control_do_dinheiro/app/controllers/registros_screen_controller.dart';
+import 'package:control_do_dinheiro/app/pages/estatistica/estatistica_page.dart';
 import 'package:control_do_dinheiro/app/pages/home_page/componentes/registro_item.dart';
 import 'package:flutter/material.dart';
 
@@ -97,7 +98,16 @@ class _RegistroPageState extends State<RegistroPage> {
           ),
         ),
         IconButton(
-          onPressed: isEmpty ? () {} : null,
+          onPressed: !isEmpty
+              ? () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EstatisticaPage(),
+                    ),
+                  );
+                }
+              : null,
           icon: Icon(
             Icons.bar_chart,
             color: isEmpty ? Colors.white : Colors.grey,

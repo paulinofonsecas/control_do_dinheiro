@@ -25,7 +25,6 @@ class _HomePageState extends State<HomePage> {
         scrollDirection: Axis.horizontal,
         children: [
           TrabalhadoresPage(),
-          EstatisticaPage(),
           RegistroPage(),
         ],
       ),

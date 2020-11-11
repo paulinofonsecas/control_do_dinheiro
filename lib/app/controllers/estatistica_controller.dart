@@ -30,9 +30,11 @@ class EstatisticaController {
     7: 0.0,
   };
 
-
   TextStyle getTitleStyle(double value) {
-    return TextStyle(color: Colors.white);
+    return TextStyle(
+      color: Colors.white,
+      fontSize: 18,
+    );
   }
 
   String getTitles(double value) {
@@ -59,12 +61,22 @@ class EstatisticaController {
   Future<List<Registro>> get getRegistros async {
     return registros();
   }
+
   criarOsDados() async {
+    // var registros = [
+    //   Registro(dateTime: DateTime(2020, 11, 9), entrada: 10000, saida: 5000),
+    //   Registro(dateTime: DateTime(2020, 11, 10), entrada: 20000, saida: 18500),
+    //   Registro(dateTime: DateTime(2020, 11, 11), entrada: 15000, saida: 9000),
+    //   Registro(dateTime: DateTime(2020, 11, 12), entrada: 8000, saida: 4000),
+    //   Registro(dateTime: DateTime(2020, 11, 13), entrada: 12000, saida: 9000),
+    //   Registro(dateTime: DateTime(2020, 11, 14), entrada: 7000, saida: 5600),
+    //   Registro(dateTime: DateTime(2020, 11, 15), entrada: 18000, saida: 15000),
+    // ];
     var registros = await getRegistros;
     registros.forEach((r) {
       var semana = r.dateTime.weekday;
-      entradaNaSemana[semana] += r.entrada;
-      saidaNaSemana[semana] += r.saida;
+      entradaNaSemana[semana] = r.entrada;
+      saidaNaSemana[semana] = r.saida;
     });
   }
 

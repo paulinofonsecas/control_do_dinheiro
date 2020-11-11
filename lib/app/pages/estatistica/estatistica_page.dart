@@ -20,26 +20,56 @@ class _EstatisticaPageState extends State<EstatisticaPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            Container(
-              padding: EdgeInsets.all(20),
-              child: BarChart(
-                BarChartData(
-                  groupsSpace: 20,
-                  titlesData: FlTitlesData(
-                    bottomTitles: SideTitles(
-                      showTitles: true,
-                      getTextStyles: _controller.getTitleStyle,
-                      getTitles: _controller.getTitles,
-                    ),
-                  ),
-                  barGroups: _controller.getBarGroupsOfWeek,
+        body: Align(
+          alignment: Alignment.center,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Estatistica da Semana',
+                style: TextStyle(
+                  fontSize: 30,
                 ),
               ),
-            ),
-          ],
+              SizedBox(height: 50),
+              CustomChart(controller: _controller),
+            ],
+          ),
         ),
+      ),
+    );
+  }
+}
+
+class CustomChart extends StatelessWidget {
+  const CustomChart({
+    Key key,
+    @required EstatisticaController controller,
+  })  : _controller = controller,
+        super(key: key);
+
+  final EstatisticaController _controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return BarChart(
+      BarChartData(
+        alignment: BarChartAlignment.center,
+        groupsSpace: 20,
+        borderData: FlBorderData(
+          show: false,
+        ),
+        titlesData: FlTitlesData(
+          leftTitles: SideTitles(
+            showTitles: false,
+          ),
+          bottomTitles: SideTitles(
+            showTitles: true,
+            getTextStyles: _controller.getTitleStyle,
+            getTitles: _controller.getTitles,
+          ),
+        ),
+        barGroups: _controller.getBarGroupsOfWeek,
       ),
     );
   }
