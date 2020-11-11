@@ -27,7 +27,7 @@ class _RegistroPageState extends State<RegistroPage> {
       child: Scaffold(
         backgroundColor: Color(0xff282936),
         body: FutureBuilder<List<Registro>>(
-          future: _controller.registros(),
+          future: _controller.getRegistros(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               var registros = snapshot.data;

@@ -1,3 +1,4 @@
+import 'package:control_do_dinheiro/app/pages/estatistica/estatistica_page.dart';
 import 'package:control_do_dinheiro/app/pages/registros_pages/resgistros_screen.dart';
 import 'package:control_do_dinheiro/app/pages/trabalhadores_page/trabalhadores_page.dart';
 import 'package:flutter/material.dart';
@@ -24,8 +25,8 @@ class _HomePageState extends State<HomePage> {
         scrollDirection: Axis.horizontal,
         children: [
           TrabalhadoresPage(),
+          EstatisticaPage(),
           RegistroPage(),
-          Container(color: Colors.red),
         ],
       ),
     );
