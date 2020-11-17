@@ -22,6 +22,7 @@ class CustomAppBar extends StatelessWidget {
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               title,
@@ -31,7 +32,6 @@ class CustomAppBar extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Spacer(),
             Row(
               children: actions ?? [],
             ),

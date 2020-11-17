@@ -79,7 +79,8 @@ class BaseDeDadosDeTrabalhadoresImpl implements BaseDeDados<TrabalhadorModel> {
   Future<Either<Exception, TrabalhadorModel>> buscarPorId(int id) async {
     var db = await open();
     try {
-      var listMap = await db.query(table, where: 'idTrabalhador=?', whereArgs: [id]);
+      var listMap =
+          await db.query(table, where: 'idTrabalhador=?', whereArgs: [id]);
       if (listMap != null && listMap.isNotEmpty) {
         var trabalhadorModel = TrabalhadorModel.fromMap(listMap.first);
         return Right(trabalhadorModel);
@@ -121,8 +122,7 @@ class BaseDeDadosDeTrabalhadoresImpl implements BaseDeDados<TrabalhadorModel> {
     }
   }
 
-  Future<Either<Exception, TrabalhadorModel>> eliminar(
-      int id) async {
+  Future<Either<Exception, TrabalhadorModel>> eliminar(int id) async {
     var db = await open();
     try {
       var trabalhadorPorEliminar = await buscarPorId(id);
@@ -133,8 +133,7 @@ class BaseDeDadosDeTrabalhadoresImpl implements BaseDeDados<TrabalhadorModel> {
     }
   }
 
-  Future<Either<Exception, List<TrabalhadorModel>>>
-      getAll() async {
+  Future<Either<Exception, List<TrabalhadorModel>>> getAll() async {
     var db = await open();
     try {
       var listInMap = await db.query(table);

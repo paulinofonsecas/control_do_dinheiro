@@ -34,7 +34,12 @@ class _CadastroDeUsuarioPageState extends State<CadastroDeUsuarioPage> {
             child: CircularProgressIndicator(),
           );
         } else if (state == EstadoDeForulario.finalizado) {
-          return Center(child: Icon(Icons.verified));
+          return Center(
+            child: Icon(
+              Icons.verified,
+              color: Colors.green,
+            ),
+          );
         }
         return Container(
           child: Center(
