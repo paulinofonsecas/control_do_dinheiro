@@ -21,20 +21,26 @@ class PrimaryEnterText extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: TextField(
         controller: controller,
-        style: TextStyle(color: Colors.white),
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 25,
+        ),
         keyboardType: keyboardType,
         onChanged: onChange,
         decoration: InputDecoration(
           labelText: title,
           labelStyle: TextStyle(
+            fontSize: 25,
             color: Colors.white,
           ),
-          border: UnderlineInputBorder(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
             borderSide: BorderSide(
               color: Colors.white,
             ),
           ),
-          enabledBorder: UnderlineInputBorder(
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
             borderSide: BorderSide(
               color: Colors.white,
             ),

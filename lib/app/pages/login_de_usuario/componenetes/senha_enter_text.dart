@@ -17,10 +17,14 @@ class SenhaEnterText extends StatelessWidget {
       child: TextField(
         controller: senhaTextController,
         obscureText: true,
-        style: TextStyle(color: Colors.white),
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 25,
+        ),
         decoration: InputDecoration(
           labelText: title,
           labelStyle: TextStyle(
+            fontSize: 25,
             color: Colors.white,
           ),
           border: OutlineInputBorder(

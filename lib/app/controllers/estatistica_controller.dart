@@ -80,8 +80,8 @@ class EstatisticaController {
     });
   }
 
-  List<BarChartGroupData> get getBarGroupsOfWeek {
-    criarOsDados();
+  Future<List<BarChartGroupData>> get getBarGroupsOfWeek async {
+    await criarOsDados();
     return List.generate(
       7,
       (index) {

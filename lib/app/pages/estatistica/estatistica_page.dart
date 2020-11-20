@@ -20,21 +20,18 @@ class _EstatisticaPageState extends State<EstatisticaPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Align(
-          alignment: Alignment.center,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Estatistica da Semana',
-                style: TextStyle(
-                  fontSize: 30,
-                ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Est. Semana',
+              style: TextStyle(
+                fontSize: 50,
               ),
-              SizedBox(height: 50),
-              CustomChart(controller: _controller),
-            ],
-          ),
+            ),
+            SizedBox(height: 50),
+            CustomChart(controller: _controller),
+          ],
         ),
       ),
     );
@@ -52,25 +49,37 @@ class CustomChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BarChart(
-      BarChartData(
-        alignment: BarChartAlignment.center,
-        groupsSpace: 20,
-        borderData: FlBorderData(
-          show: false,
-        ),
-        titlesData: FlTitlesData(
-          leftTitles: SideTitles(
-            showTitles: false,
-          ),
-          bottomTitles: SideTitles(
-            showTitles: true,
-            getTextStyles: _controller.getTitleStyle,
-            getTitles: _controller.getTitles,
-          ),
-        ),
-        barGroups: _controller.getBarGroupsOfWeek,
-      ),
+    return Padding(
+      padding: const EdgeInsets.all(38),
+      child: FutureBuilder<List<BarChartGroupData>>(
+          future: _controller.getBarGroupsOfWeek,
+          builder: (context, snapshot) {
+            if (snapshot.hasData &&
+                snapshot.connectionState == ConnectionState.done) {
+              var barChartGroupData = snapshot.data;
+              return BarChart(
+                BarChartData(
+                  alignment: BarChartAlignment.center,
+                  groupsSpace: 20,
+                  borderData: FlBorderData(
+                    show: false,
+                  ),
+                  titlesData: FlTitlesData(
+                    leftTitles: SideTitles(
+                      showTitles: false,
+                    ),
+                    bottomTitles: SideTitles(
+                      showTitles: true,
+                      getTextStyles: _controller.getTitleStyle,
+                      getTitles: _controller.getTitles,
+                    ),
+                  ),
+                  barGroups: barChartGroupData,
+                ),
+              );
+            } else
+              return CircularProgressIndicator();
+          }),
     );
   }
 }
